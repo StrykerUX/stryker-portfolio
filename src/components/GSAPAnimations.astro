@@ -1,0 +1,474 @@
+---
+// GSAP Animations Component
+// This component handles all GSAP animations for the portfolio
+---
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  // Register GSAP plugins
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set up GSAP defaults
+    gsap.defaults({
+      duration: 0.8,
+      ease: "power2.out"
+    });
+
+    // === HEADER ANIMATIONS ===
+    function initHeaderAnimations() {
+      const header = document.querySelector('.header');
+      const logo = header?.querySelector('.logo-link');
+      const navLinks = header?.querySelectorAll('.nav-link');
+
+      // Header entrance animation
+      gsap.fromTo(header, 
+        { y: -100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+      );
+
+      // Logo animation
+      if (logo) {
+        gsap.fromTo(logo, 
+          { scale: 0, rotation: -180 },
+          { scale: 1, rotation: 0, duration: 1.2, delay: 0.3, ease: "back.out(1.7)" }
+        );
+      }
+
+      // Nav links stagger animation
+      if (navLinks.length) {
+        gsap.fromTo(navLinks,
+          { y: -30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 0.5 }
+        );
+      }
+
+      // Header scroll behavior
+      ScrollTrigger.create({
+        start: "top -80",
+        end: 99999,
+        toggleClass: { className: "scrolled", targets: header }
+      });
+    }
+
+    // === HERO ANIMATIONS ===
+    function initHeroAnimations() {
+      const heroTitle1 = document.querySelector('[data-animate="title-1"]');
+      const heroTitle2 = document.querySelector('[data-animate="title-2"]');
+      const heroSubtitle = document.querySelector('[data-animate="subtitle"]');
+      const heroDescription = document.querySelector('[data-animate="description"]');
+      const scrollIndicator = document.querySelector('[data-animate="scroll"]');
+      const statsSection = document.querySelector('[data-animate="stats"]');
+
+      // Create hero timeline
+      const heroTl = gsap.timeline({ delay: 0.8 });
+
+      if (heroTitle1) {
+        heroTl.fromTo(heroTitle1,
+          { y: 100, opacity: 0, rotationX: 90 },
+          { y: 0, opacity: 1, rotationX: 0, duration: 1, ease: "power3.out" }
+        );
+      }
+
+      if (heroTitle2) {
+        heroTl.fromTo(heroTitle2,
+          { y: 100, opacity: 0, rotationX: 90 },
+          { y: 0, opacity: 1, rotationX: 0, duration: 1, ease: "power3.out" },
+          "-=0.5"
+        );
+      }
+
+      if (heroSubtitle) {
+        heroTl.fromTo(heroSubtitle,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.3"
+        );
+      }
+
+      if (heroDescription) {
+        heroTl.fromTo(heroDescription,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          "-=0.2"
+        );
+      }
+
+      if (scrollIndicator) {
+        heroTl.fromTo(scrollIndicator,
+          { y: 30, opacity: 0, scale: 0.8 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.6 },
+          "-=0.1"
+        );
+      }
+
+      if (statsSection) {
+        heroTl.fromTo(statsSection,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.2"
+        );
+      }
+
+      // Floating elements animation
+      const floatingElements = document.querySelectorAll('.floating-element');
+      floatingElements.forEach((element, index) => {
+        gsap.to(element, {
+          y: "random(-20, 20)",
+          x: "random(-15, 15)",
+          rotation: "random(-5, 5)",
+          duration: "random(3, 6)",
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: index * 0.5
+        });
+      });
+    }
+
+    // === PROJECTS GRID ANIMATIONS ===
+    function initProjectsAnimations() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      // Filter buttons entrance
+      gsap.fromTo(filterBtns,
+        { y: 30, opacity: 0, scale: 0.9 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          scale: 1, 
+          duration: 0.6, 
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".filters-container",
+            start: "top 80%",
+            end: "bottom 20%",
+          }
+        }
+      );
+
+      // Project cards entrance with ScrollTrigger
+      projectCards.forEach((card, index) => {
+        gsap.fromTo(card,
+          { 
+            y: 60, 
+            opacity: 0, 
+            scale: 0.9,
+            rotationY: 15
+          },
+          { 
+            y: 0, 
+            opacity: 1, 
+            scale: 1,
+            rotationY: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              end: "bottom 15%",
+            }
+          }
+        );
+
+        // Hover animations for project cards
+        const cardImage = card.querySelector('.project-image');
+        const cardInfo = card.querySelector('.project-info');
+
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, { 
+            y: -8, 
+            scale: 1.02,
+            boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+            duration: 0.4,
+            ease: "power2.out"
+          });
+
+          if (cardImage) {
+            gsap.to(cardImage, { 
+              scale: 1.05, 
+              duration: 0.4 
+            });
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { 
+            y: 0, 
+            scale: 1,
+            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+            duration: 0.4,
+            ease: "power2.out"
+          });
+
+          if (cardImage) {
+            gsap.to(cardImage, { 
+              scale: 1, 
+              duration: 0.4 
+            });
+          }
+        });
+
+        // Parallax effect on scroll
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: self => {
+            const progress = self.progress;
+            const yPos = progress * 50;
+            gsap.to(cardImage, { 
+              y: yPos, 
+              duration: 0.3,
+              overwrite: "auto"
+            });
+          }
+        });
+      });
+
+      // Filter functionality with animations
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+          
+          // Animate filter button states
+          gsap.to(filterBtns, { scale: 0.95, duration: 0.1 });
+          gsap.to(btn, { scale: 1.05, duration: 0.1, delay: 0.1 });
+          
+          setTimeout(() => {
+            gsap.to(filterBtns, { scale: 1, duration: 0.2 });
+          }, 200);
+
+          // Filter and animate projects
+          projectCards.forEach((card, index) => {
+            const cardCategory = card.getAttribute('data-category');
+            const shouldShow = filter === 'todos' || cardCategory === filter;
+            
+            if (shouldShow) {
+              gsap.to(card, {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.6,
+                delay: index * 0.05,
+                ease: "power2.out"
+              });
+              card.style.display = 'block';
+            } else {
+              gsap.to(card, {
+                opacity: 0,
+                scale: 0.8,
+                y: 30,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: () => {
+                  card.style.display = 'none';
+                }
+              });
+            }
+          });
+        });
+      });
+    }
+
+    // === FOOTER/CTA ANIMATIONS ===
+    function initFooterAnimations() {
+      const ctaTitle = document.querySelector('[data-animate="cta-title"]');
+      const ctaDescription = document.querySelector('[data-animate="cta-description"]');
+      const ctaButton = document.querySelector('[data-animate="cta-button"]');
+      const contactInfo = document.querySelector('[data-animate="contact-info"]');
+
+      // CTA section timeline
+      const ctaTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".cta-section",
+          start: "top 70%",
+          end: "bottom 30%",
+        }
+      });
+
+      if (ctaTitle) {
+        ctaTl.fromTo(ctaTitle,
+          { y: 80, opacity: 0, rotationX: 30 },
+          { y: 0, opacity: 1, rotationX: 0, duration: 1, ease: "power3.out" }
+        );
+      }
+
+      if (ctaDescription) {
+        ctaTl.fromTo(ctaDescription,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.5"
+        );
+      }
+
+      if (ctaButton) {
+        ctaTl.fromTo(ctaButton,
+          { y: 30, opacity: 0, scale: 0.9 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.6 },
+          "-=0.3"
+        );
+      }
+
+      if (contactInfo) {
+        ctaTl.fromTo(contactInfo,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.4"
+        );
+      }
+
+      // CTA button hover animation
+      const ctaButtonEl = document.querySelector('.cta-button a');
+      if (ctaButtonEl) {
+        ctaButtonEl.addEventListener('mouseenter', () => {
+          gsap.to(ctaButtonEl, { 
+            scale: 1.05, 
+            y: -2,
+            boxShadow: "0 10px 30px rgba(250, 240, 21, 0.3)",
+            duration: 0.3 
+          });
+        });
+
+        ctaButtonEl.addEventListener('mouseleave', () => {
+          gsap.to(ctaButtonEl, { 
+            scale: 1, 
+            y: 0,
+            boxShadow: "0 0px 0px rgba(250, 240, 21, 0)",
+            duration: 0.3 
+          });
+        });
+      }
+    }
+
+    // === MAGNETIC CURSOR EFFECT ===
+    function initMagneticCursor() {
+      const cursor = document.createElement('div');
+      cursor.classList.add('custom-cursor');
+      document.body.appendChild(cursor);
+
+      const cursorInner = document.createElement('div');
+      cursorInner.classList.add('custom-cursor-inner');
+      cursor.appendChild(cursorInner);
+
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // Animate cursor
+      gsap.ticker.add(() => {
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+        
+        gsap.set(cursor, {
+          x: cursorX,
+          y: cursorY
+        });
+      });
+
+      // Magnetic effect for interactive elements
+      const magneticElements = document.querySelectorAll('.project-card, .filter-btn, .cta-button a, .nav-link');
+      
+      magneticElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(cursor, { scale: 1.5, duration: 0.3 });
+          cursorInner.style.backgroundColor = '#faf015';
+        });
+
+        el.addEventListener('mouseleave', () => {
+          gsap.to(cursor, { scale: 1, duration: 0.3 });
+          cursorInner.style.backgroundColor = '#000';
+        });
+      });
+    }
+
+    // === SMOOTH SCROLL ===
+    function initSmoothScroll() {
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            gsap.to(window, {
+              duration: 1.5,
+              scrollTo: { y: target, offsetY: 80 },
+              ease: "power3.inOut"
+            });
+          }
+        });
+      });
+    }
+
+    // Initialize all animations
+    initHeaderAnimations();
+    initHeroAnimations();
+    initProjectsAnimations();
+    initFooterAnimations();
+    initMagneticCursor();
+    initSmoothScroll();
+
+    // Performance optimization
+    ScrollTrigger.refresh();
+  });
+</script>
+
+<style is:global>
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+
+  .custom-cursor-inner {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .header.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Hide default cursor on interactive elements */
+  .project-card,
+  .filter-btn,
+  .cta-button a,
+  .nav-link {
+    cursor: none;
+  }
+
+  /* Smooth hardware acceleration */
+  .project-card,
+  .floating-element,
+  .custom-cursor {
+    will-change: transform;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .custom-cursor {
+      display: none;
+    }
+    
+    .floating-element {
+      animation: none;
+    }
+  }
+</style>

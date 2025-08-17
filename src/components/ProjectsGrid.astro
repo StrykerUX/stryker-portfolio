@@ -1,0 +1,145 @@
+---
+import { projects } from '../data/projects.ts';
+
+export interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+---
+
+<!-- Grid principal: dos columnas, gutter 40px, ritmo vertical 48-56px -->
+<section class="pb-20 bg-white">
+  <div class="container max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+      {projects.map((project, index) => (
+        <article 
+          class="project-card group cursor-pointer"
+          data-category={project.category}
+        >
+          <!-- Metadatos en gris 500, cuerpo 12-13px -->
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-2">
+            {project.client} — {project.category.replace('-', ' ')} — {project.year}
+          </div>
+
+          <!-- Título en mayúsculas, 14-16px, peso 800 -->
+          <h3 class="text-sm font-extrabold text-gray-900 uppercase tracking-wide mb-4">
+            {project.title}
+          </h3>
+
+          <!-- Miniatura grande con esquinas 20px, sin efectos 3D -->
+          <div class="project-image relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+              <span class="text-gray-400 text-sm font-medium">
+                {project.title}
+              </span>
+            </div>
+          </div>
+
+          <!-- Link invisible para toda la tarjeta -->
+          <a 
+            href={`/${lang === 'en' ? 'en/' : ''}proyecto/${project.slug}`}
+            class="absolute inset-0 z-10"
+            aria-label={`Ver proyecto ${project.title}`}
+          >
+            <span class="sr-only">Ver proyecto {project.title}</span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <!-- Botón "Cargar más" centrado, estilo fantasma -->
+    <div class="text-center">
+      <button class="load-more-btn px-6 py-3 border border-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-300">
+        {lang === 'es' ? 'Cargar más proyectos' : 'Load more projects'}
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .filter-btn {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .filter-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .load-more-btn {
+    transform: translateY(20px);
+  }
+
+  .load-more-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+    z-index: 1;
+  }
+
+  .category-badge {
+    backdrop-filter: blur(10px);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        
+        // Update active filter button
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-black', 'text-white', 'shadow-lg');
+          b.classList.add('bg-gray-100', 'text-gray-600');
+        });
+        btn.classList.remove('bg-gray-100', 'text-gray-600');
+        btn.classList.add('bg-black', 'text-white', 'shadow-lg');
+
+        // Filter projects
+        projectCards.forEach((card, index) => {
+          const cardCategory = card.getAttribute('data-category');
+          const shouldShow = filter === 'todos' || cardCategory === filter;
+          
+          if (shouldShow) {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // Intersection Observer for animations (removed - projects now visible by default)
+
+    // No magnetic or 3D effects - keeping it minimal
+  });
+</script>

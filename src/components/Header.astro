@@ -1,0 +1,186 @@
+---
+export interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+// Minimal navigation items
+const content = {
+  es: {
+    home: 'INICIO',
+    contact: 'CONTACTAR',
+    homeHref: '/',
+    contactHref: '/contacto'
+  },
+  en: {
+    home: 'HOME',
+    contact: 'CONTACT',
+    homeHref: '/en',
+    contactHref: '/en/contact'
+  }
+};
+
+const text = content[lang];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!-- Header flotante con backdrop blur -->
+<header class="header fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+  <!-- Desktop: header flotante con backdrop blur -->
+  <nav class="hidden md:flex items-center px-6 py-3 bg-white/80 backdrop-blur-md rounded-full border border-gray-200/50 shadow-lg shadow-black/5">
+    <!-- Logo -->
+    <a href={text.homeHref} class="logo-link mr-8">
+      <div class="w-8 h-8 bg-black rounded-sm flex items-center justify-center">
+        <span class="text-white font-bold text-xs">SR</span>
+      </div>
+    </a>
+
+    <!-- Navegación -->
+    <div class="flex items-center space-x-8">
+      <a 
+        href={text.homeHref}
+        class={`nav-link text-xs font-medium tracking-wide transition-all duration-200 ${
+          currentPath === text.homeHref 
+            ? 'text-gray-900' 
+            : 'text-gray-600 hover:text-gray-900'
+        }`}
+      >
+        {text.home}
+      </a>
+
+      <!-- Language Toggle -->
+      <div class="flex items-center space-x-1">
+        <a 
+          href={currentPath.replace('/en', '') || '/'}
+          class={`text-xs px-2 py-1 transition-all duration-200 ${
+            lang === 'es' ? 'font-medium text-gray-900' : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          ES
+        </a>
+        <span class="text-gray-300">|</span>
+        <a 
+          href={`/en${currentPath === '/' ? '' : currentPath}`}
+          class={`text-xs px-2 py-1 transition-all duration-200 ${
+            lang === 'en' ? 'font-medium text-gray-900' : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          EN
+        </a>
+      </div>
+
+      <!-- Botón contactar destacado -->
+      <a 
+        href={text.contactHref}
+        class="contact-btn px-4 py-2 bg-black text-white text-xs font-medium tracking-wide rounded-full hover:bg-gray-800 transition-all duration-200"
+      >
+        {text.contact}
+      </a>
+    </div>
+  </nav>
+
+  <!-- Mobile: header flotante simplificado -->
+  <nav class="md:hidden flex items-center px-4 py-3 bg-white/80 backdrop-blur-md rounded-full border border-gray-200/50 shadow-lg shadow-black/5">
+    <!-- Logo -->
+    <a href={text.homeHref} class="logo-link">
+      <div class="w-8 h-8 bg-black rounded-sm flex items-center justify-center">
+        <span class="text-white font-bold text-xs">SR</span>
+      </div>
+    </a>
+
+    <!-- Hamburger button -->
+    <button class="mobile-menu-btn ml-4 p-2">
+      <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Menu móvil desplegable flotante -->
+  <div class="mobile-menu hidden md:hidden absolute top-full left-0 right-0 mt-4 mx-4 bg-white/90 backdrop-blur-md rounded-2xl border border-gray-200/50 shadow-xl shadow-black/10 overflow-hidden">
+    <div class="p-6 space-y-4">
+      <a 
+        href={text.homeHref}
+        class="block text-sm font-medium text-gray-900 tracking-wide hover:text-gray-600 transition-colors"
+      >
+        {text.home}
+      </a>
+      
+      <!-- Language Toggle Mobile -->
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-gray-500">{lang === 'es' ? 'Idioma:' : 'Language:'}</span>
+        <div class="flex items-center space-x-1">
+          <a 
+            href={currentPath.replace('/en', '') || '/'}
+            class={`text-sm px-3 py-1 rounded-full transition-all ${
+              lang === 'es' ? 'bg-gray-100 font-medium text-gray-900' : 'text-gray-600 hover:bg-gray-50'
+            }`}
+          >
+            ES
+          </a>
+          <a 
+            href={`/en${currentPath === '/' ? '' : currentPath}`}
+            class={`text-sm px-3 py-1 rounded-full transition-all ${
+              lang === 'en' ? 'bg-gray-100 font-medium text-gray-900' : 'text-gray-600 hover:bg-gray-50'
+            }`}
+          >
+            EN
+          </a>
+        </div>
+      </div>
+
+      <a 
+        href={text.contactHref}
+        class="block w-full text-center py-3 bg-black text-white text-sm font-medium tracking-wide rounded-full hover:bg-gray-800 transition-all"
+      >
+        {text.contact}
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    transition: all 0.3s ease;
+  }
+  
+  .logo-link:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
+  }
+
+  .contact-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .mobile-menu {
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+  }
+
+  /* Soporte para navegadores que no soportan backdrop-filter */
+  @supports not (backdrop-filter: blur()) {
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .mobile-menu {
+      background: rgba(255, 255, 255, 0.95);
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>

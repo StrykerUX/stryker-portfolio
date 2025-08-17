@@ -1,0 +1,56 @@
+---
+// Component for filter functionality
+---
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Filter functionality
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const filter = chip.getAttribute('data-filter');
+        
+        // Update active filter chip
+        filterChips.forEach(c => {
+          c.classList.remove('bg-black', 'text-white');
+          c.classList.add('bg-white', 'border', 'border-gray-200', 'text-black');
+        });
+        
+        chip.classList.remove('bg-white', 'border', 'border-gray-200', 'text-black');
+        chip.classList.add('bg-black', 'text-white');
+
+        // Filter projects
+        projectCards.forEach((card) => {
+          const cardCategory = card.getAttribute('data-category');
+          const shouldShow = filter === 'todos' || cardCategory === filter;
+          
+          if (shouldShow) {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // No hover effects needed - keeping it minimal
+
+    // Load more functionality
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        // Simulate loading more projects
+        loadMoreBtn.textContent = 'Cargando...';
+        setTimeout(() => {
+          loadMoreBtn.textContent = 'Cargar más proyectos';
+        }, 1000);
+      });
+    }
+  });
+</script>

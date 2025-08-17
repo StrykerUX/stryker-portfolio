@@ -1,0 +1,155 @@
+---
+import { categories } from '../data/projects.ts';
+
+export interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const content = {
+  es: {
+    title: 'Todos los proyectos'
+  },
+  en: {
+    title: 'All projects'
+  }
+};
+
+const text = content[lang];
+const currentCategories = categories[lang];
+---
+
+<!-- Sección principal minimalista -->
+<section class="pt-24 pb-16 bg-white">
+  <div class="container max-w-7xl mx-auto px-6">
+    <!-- H1 dominante: 56-64px, tracking negativo -->
+    <h1 class="text-6xl font-extrabold text-gray-900 tracking-tight mb-12">
+      {text.title}
+    </h1>
+
+    <!-- Filtros como chips funcionales -->
+    <div class="flex flex-wrap gap-3 mb-16">
+      {currentCategories.map((category, index) => (
+        <button 
+          class={`filter-chip px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            index === 0 
+              ? 'bg-black text-white' 
+              : 'bg-white border border-gray-200 text-black hover:border-gray-300'
+          }`}
+          data-filter={category.id}
+        >
+          {category.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .floating-element:nth-child(2) {
+    animation-delay: -2s;
+  }
+
+  .floating-element:nth-child(3) {
+    animation-delay: -4s;
+  }
+
+  .floating-element:nth-child(4) {
+    animation-delay: -1s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+  }
+
+  .scroll-dot {
+    animation: scroll 2s infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+  }
+
+  .hero {
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(250, 240, 21, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(38, 54, 84, 0.1) 0%, transparent 50%);
+  }
+
+  .stat-item {
+    transition: transform 0.3s ease;
+  }
+
+  .stat-item:hover {
+    transform: translateY(-4px);
+  }
+</style>
+
+<script>
+  // Counter animation for stats
+  function animateCounter(element: Element, target: number) {
+    let current = 0;
+    const increment = target / 60; // 60 frames for smooth animation
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      element.textContent = Math.floor(current).toString();
+    }, 16); // ~60fps
+  }
+
+  // Initialize counters when they come into view
+  document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('[data-count]');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = parseInt(entry.target.getAttribute('data-count') || '0');
+          animateCounter(entry.target, target);
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    counters.forEach(counter => observer.observe(counter));
+  });
+
+  // Smooth scroll to projects section
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+      scrollIndicator.addEventListener('click', () => {
+        const projectsSection = document.querySelector('.projects-section');
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  });
+</script>

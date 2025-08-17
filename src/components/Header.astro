@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import LiquidGlass from './LiquidGlass.astro';
 
 export interface Props {
   lang?: 'es' | 'en';
@@ -28,21 +29,143 @@ const text = content[lang];
 const currentPath = Astro.url.pathname;
 ---
 
-<!-- Header flotante con backdrop blur -->
+<!-- Header flotante glassmorphism -->
 <header class="header fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-  <!-- Desktop: header flotante con backdrop blur -->
-  <nav class="hidden md:flex items-center pl-6 pr-3 py-3 rounded-full border shadow-lg shadow-black/5 dark:shadow-white/5" style="background-color: rgba(255, 255, 255, 0.1); border-color: rgba(229, 231, 235, 0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); -moz-backdrop-filter: blur(20px); -ms-backdrop-filter: blur(20px);">
+  <!-- Desktop: header flotante liquid glass WebGL -->
+  <LiquidGlass className="hidden md:flex items-center pl-6 pr-3 py-3 rounded-full border shadow-xl">
+    <nav class="flex items-center w-full">
     <style>
-      nav {
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        -moz-backdrop-filter: blur(20px) saturate(180%) !important;
-        -ms-backdrop-filter: blur(20px) saturate(180%) !important;
+      .glassmorphism {
+        position: relative;
+        background: 
+          linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1)),
+          linear-gradient(45deg, rgba(255, 255, 255, 0.15), transparent 70%),
+          radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.3), transparent 60%),
+          radial-gradient(ellipse at bottom right, rgba(255, 255, 255, 0.2), transparent 70%),
+          radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 
+          0 8px 32px rgba(31, 38, 135, 0.15),
+          0 2px 16px rgba(255, 255, 255, 0.2),
+          0 1px 4px rgba(255, 255, 255, 0.3),
+          inset 0 2px 0 rgba(255, 255, 255, 0.7),
+          inset 0 -2px 0 rgba(255, 255, 255, 0.3),
+          inset 2px 0 0 rgba(255, 255, 255, 0.5),
+          inset -2px 0 0 rgba(255, 255, 255, 0.3),
+          inset 0 0 20px rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
       }
       
-      :root.dark nav {
-        background-color: rgba(42, 42, 42, 0.1) !important;
-        border-color: rgba(50, 50, 50, 0.2) !important;
+      /* Gradient Border Layer */
+      .glassmorphism::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.6), 
+          rgba(255, 255, 255, 0.2), 
+          rgba(255, 255, 255, 0.4),
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.5)
+        );
+        border-radius: inherit;
+        z-index: -1;
+        animation: border-shimmer 8s ease-in-out infinite;
+      }
+
+      /* Inner Glass Surface */
+      .glassmorphism::after {
+        content: '';
+        position: absolute;
+        inset: 2px;
+        background: 
+          radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 40%),
+          radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.3) 0%, transparent 35%),
+          radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.25) 0%, transparent 40%),
+          radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 45%),
+          linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.3) 50%, transparent 65%),
+          linear-gradient(25deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
+        border-radius: inherit;
+        pointer-events: none;
+        z-index: 1;
+        animation: liquid-surface 10s ease-in-out infinite;
+      }
+      
+      /* Dark Mode Liquid Glass */
+      :root.dark .glassmorphism {
+        background: 
+          linear-gradient(135deg, rgba(42, 42, 42, 0.4), rgba(42, 42, 42, 0.2)),
+          linear-gradient(45deg, rgba(255, 255, 255, 0.08), transparent 70%),
+          radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.15), transparent 60%),
+          radial-gradient(ellipse at bottom right, rgba(255, 255, 255, 0.1), transparent 70%),
+          radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03), transparent);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.4),
+          0 2px 16px rgba(255, 255, 255, 0.08),
+          0 1px 4px rgba(255, 255, 255, 0.1),
+          inset 0 2px 0 rgba(255, 255, 255, 0.25),
+          inset 0 -2px 0 rgba(255, 255, 255, 0.1),
+          inset 2px 0 0 rgba(255, 255, 255, 0.15),
+          inset -2px 0 0 rgba(255, 255, 255, 0.1),
+          inset 0 0 20px rgba(255, 255, 255, 0.05);
+      }
+      
+      :root.dark .glassmorphism::before {
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.3), 
+          rgba(255, 255, 255, 0.1), 
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.25)
+        );
+      }
+      
+      :root.dark .glassmorphism::after {
+        background: 
+          radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
+          radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 35%),
+          radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
+          radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 45%),
+          linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.15) 50%, transparent 65%),
+          linear-gradient(25deg, transparent 40%, rgba(255, 255, 255, 0.08) 50%, transparent 60%);
+      }
+      
+      /* Content above liquid glass */
+      .glassmorphism > * {
+        position: relative;
+        z-index: 3;
+      }
+      
+      /* Liquid Surface Animation */
+      @keyframes liquid-surface {
+        0%, 100% {
+          background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%;
+          transform: scale(1) rotate(0deg);
+        }
+        25% {
+          background-position: 25% 25%, 75% 75%, 75% 25%, 25% 75%;
+          transform: scale(1.02) rotate(0.5deg);
+        }
+        50% {
+          background-position: 50% 50%, 50% 50%, 100% 0%, 50% 50%;
+          transform: scale(1) rotate(0deg);
+        }
+        75% {
+          background-position: 75% 25%, 25% 75%, 25% 75%, 75% 25%;
+          transform: scale(1.01) rotate(-0.5deg);
+        }
+      }
+      
+      /* Border Shimmer Animation */
+      @keyframes border-shimmer {
+        0%, 100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
       }
     </style>
     <!-- Logo -->
@@ -87,22 +210,12 @@ const currentPath = Astro.url.pathname;
       >
         {text.contact}
       </a>
-    </div>
-  </nav>
+    </nav>
+  </LiquidGlass>
 
   <!-- Mobile: header flotante simplificado -->
-  <nav class="md:hidden flex items-center px-4 py-3 rounded-full border shadow-lg shadow-black/5 dark:shadow-white/5" style="background-color: rgba(255, 255, 255, 0.1); border-color: rgba(229, 231, 235, 0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
-    <style>
-      nav:last-of-type {
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-      }
-      
-      :root.dark nav:last-of-type {
-        background-color: rgba(42, 42, 42, 0.1) !important;
-        border-color: rgba(50, 50, 50, 0.2) !important;
-      }
-    </style>
+  <LiquidGlass className="md:hidden flex items-center px-4 py-3 rounded-full border shadow-xl">
+    <nav class="flex items-center w-full">
     <!-- Logo -->
     <a href={text.homeHref} class="logo-link">
       <div class="w-8 h-8 bg-black rounded-sm flex items-center justify-center">
@@ -116,21 +229,11 @@ const currentPath = Astro.url.pathname;
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
-  </nav>
+    </nav>
+  </LiquidGlass>
 
   <!-- Menu móvil desplegable flotante -->
-  <div class="mobile-menu hidden md:hidden absolute top-full left-0 right-0 mt-4 mx-4 rounded-2xl border shadow-xl shadow-black/10 dark:shadow-white/10 overflow-hidden" style="background-color: rgba(255, 255, 255, 0.1); border-color: rgba(229, 231, 235, 0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
-    <style>
-      .mobile-menu {
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-      }
-      
-      :root.dark .mobile-menu {
-        background-color: rgba(42, 42, 42, 0.1) !important;
-        border-color: rgba(50, 50, 50, 0.2) !important;
-      }
-    </style>
+  <LiquidGlass className="mobile-menu hidden md:hidden absolute top-full left-0 right-0 mt-4 mx-4 rounded-2xl border shadow-xl overflow-hidden">
     <div class="px-4 py-6 space-y-4">
       <!-- Language Toggle Mobile -->
       <div class="flex items-center justify-between">
@@ -168,7 +271,7 @@ const currentPath = Astro.url.pathname;
         {text.contact}
       </a>
     </div>
-  </div>
+  </LiquidGlass>
 </header>
 
 <style>

@@ -12,14 +12,14 @@
       chip.addEventListener('click', () => {
         const filter = chip.getAttribute('data-filter');
         
-        // Update active filter chip
+        // Update active filter chip (supporting dark mode)
         filterChips.forEach(c => {
-          c.classList.remove('bg-black', 'text-white');
-          c.classList.add('bg-white', 'border', 'border-gray-200', 'text-black');
+          c.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+          c.classList.add('bg-white', 'dark:bg-gray-800', 'border', 'border-gray-200', 'dark:border-gray-700', 'text-black', 'dark:text-white');
         });
         
-        chip.classList.remove('bg-white', 'border', 'border-gray-200', 'text-black');
-        chip.classList.add('bg-black', 'text-white');
+        chip.classList.remove('bg-white', 'dark:bg-gray-800', 'border', 'border-gray-200', 'dark:border-gray-700', 'text-black', 'dark:text-white');
+        chip.classList.add('bg-black', 'dark:bg-white', 'text-white', 'dark:text-black');
 
         // Filter projects
         projectCards.forEach((card) => {

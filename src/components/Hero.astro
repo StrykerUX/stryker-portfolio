@@ -9,10 +9,20 @@ const { lang = 'es' } = Astro.props;
 
 const content = {
   es: {
-    title: 'Todos los proyectos'
+    title: {
+      normal: 'Acelero el ',
+      highlight1: 'desarrollo de productos digitales complejos',
+      normal2: ' combinando design thinking estratégico, solución de problemas de UX avanzados y optimización con ',
+      highlight2: 'herramientas de inteligencia artificial'
+    }
   },
   en: {
-    title: 'All projects'
+    title: {
+      normal: 'I accelerate ',
+      highlight1: 'complex digital product development',
+      normal2: ' by combining strategic design thinking, advanced UX problem-solving, and optimization with ',
+      highlight2: 'artificial intelligence tools'
+    }
   }
 };
 
@@ -21,11 +31,11 @@ const currentCategories = categories[lang];
 ---
 
 <!-- Sección principal minimalista -->
-<section class="pt-24 pb-16 bg-white">
+<section class="pt-32 pb-16 bg-white transition-colors duration-300" style="background-color: var(--brand-white);">
   <div class="container max-w-7xl mx-auto px-6">
-    <!-- H1 dominante: 56-64px, tracking negativo -->
-    <h1 class="text-6xl font-extrabold text-gray-900 tracking-tight mb-12">
-      {text.title}
+    <!-- H1 dominante con jerarquía visual -->
+    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-[1.1] mb-12 max-w-7xl">
+      <span class="opacity-40">{text.title.normal}</span><span class="opacity-100">{text.title.highlight1}</span><span class="opacity-40">{text.title.normal2}</span><span class="opacity-100">{text.title.highlight2}</span>
     </h1>
 
     <!-- Filtros como chips funcionales -->
@@ -34,9 +44,10 @@ const currentCategories = categories[lang];
         <button 
           class={`filter-chip px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
             index === 0 
-              ? 'bg-black text-white' 
-              : 'bg-white border border-gray-200 text-black hover:border-gray-300'
+              ? 'bg-black dark:bg-white text-white dark:text-black' 
+              : 'bg-white border border-gray-200 text-black dark:text-white hover:border-gray-300'
           }`}
+          style={index !== 0 ? `background-color: var(--gray-100); border-color: var(--gray-300);` : ''}
           data-filter={category.id}
         >
           {category.label}

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -18,9 +19,12 @@ export default {
           900: '#111827',
         },
       },
+      opacity: {
+        '40': '0.40',
+      },
       fontFamily: {
-        'primary': ['Inter', 'sans-serif'],
-        'secondary': ['Cardo', 'serif'],
+        'primary': ['Space Grotesk', 'sans-serif'],
+        'sans': ['Space Grotesk', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

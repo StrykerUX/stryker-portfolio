@@ -1,0 +1,99 @@
+---
+// Theme toggle component
+---
+
+<button 
+  id="theme-toggle" 
+  class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
+  aria-label="Toggle dark mode"
+>
+  <!-- Sun icon (visible in dark mode) -->
+  <svg 
+    id="sun-icon" 
+    class="w-4 h-4 text-gray-600 dark:text-gray-300 hidden dark:block transition-transform duration-200" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24"
+  >
+    <path 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="2" 
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    />
+  </svg>
+  
+  <!-- Moon icon (visible in light mode) -->
+  <svg 
+    id="moon-icon" 
+    class="w-4 h-4 text-gray-600 dark:text-gray-300 block dark:hidden transition-transform duration-200" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24"
+  >
+    <path 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="2" 
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    />
+  </svg>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Set initial theme
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+    
+    // Theme toggle functionality
+    themeToggle?.addEventListener('click', () => {
+      const isDark = html.classList.contains('dark');
+      
+      if (isDark) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          html.classList.add('dark');
+        } else {
+          html.classList.remove('dark');
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  #theme-toggle:hover {
+    transform: scale(1.05);
+  }
+  
+  #sun-icon,
+  #moon-icon {
+    transition: transform 0.2s ease;
+  }
+  
+  #theme-toggle:hover #sun-icon,
+  #theme-toggle:hover #moon-icon {
+    transform: rotate(180deg);
+  }
+</style>

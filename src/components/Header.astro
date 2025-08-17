@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+
 export interface Props {
   lang?: 'es' | 'en';
 }
@@ -29,7 +31,20 @@ const currentPath = Astro.url.pathname;
 <!-- Header flotante con backdrop blur -->
 <header class="header fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
   <!-- Desktop: header flotante con backdrop blur -->
-  <nav class="hidden md:flex items-center px-6 py-3 bg-white/80 backdrop-blur-md rounded-full border border-gray-200/50 shadow-lg shadow-black/5">
+  <nav class="hidden md:flex items-center pl-6 pr-3 py-3 rounded-full border shadow-lg shadow-black/5 dark:shadow-white/5" style="background-color: rgba(255, 255, 255, 0.1); border-color: rgba(229, 231, 235, 0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); -moz-backdrop-filter: blur(20px); -ms-backdrop-filter: blur(20px);">
+    <style>
+      nav {
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        -moz-backdrop-filter: blur(20px) saturate(180%) !important;
+        -ms-backdrop-filter: blur(20px) saturate(180%) !important;
+      }
+      
+      :root.dark nav {
+        background-color: rgba(42, 42, 42, 0.1) !important;
+        border-color: rgba(50, 50, 50, 0.2) !important;
+      }
+    </style>
     <!-- Logo -->
     <a href={text.homeHref} class="logo-link mr-8">
       <div class="w-8 h-8 bg-black rounded-sm flex items-center justify-center">
@@ -38,43 +53,37 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <!-- Navegación -->
-    <div class="flex items-center space-x-8">
-      <a 
-        href={text.homeHref}
-        class={`nav-link text-xs font-medium tracking-wide transition-all duration-200 ${
-          currentPath === text.homeHref 
-            ? 'text-gray-900' 
-            : 'text-gray-600 hover:text-gray-900'
-        }`}
-      >
-        {text.home}
-      </a>
-
+    <div class="flex items-center">
       <!-- Language Toggle -->
-      <div class="flex items-center space-x-1">
+      <div class="flex items-center space-x-1 mr-8">
         <a 
           href={currentPath.replace('/en', '') || '/'}
           class={`text-xs px-2 py-1 transition-all duration-200 ${
-            lang === 'es' ? 'font-medium text-gray-900' : 'text-gray-600 hover:text-gray-900'
+            lang === 'es' ? 'font-medium text-gray-900 dark:text-white' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'
           }`}
         >
           ES
         </a>
-        <span class="text-gray-300">|</span>
+        <span class="text-gray-300 dark:text-gray-600">|</span>
         <a 
           href={`/en${currentPath === '/' ? '' : currentPath}`}
           class={`text-xs px-2 py-1 transition-all duration-200 ${
-            lang === 'en' ? 'font-medium text-gray-900' : 'text-gray-600 hover:text-gray-900'
+            lang === 'en' ? 'font-medium text-gray-900 dark:text-white' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'
           }`}
         >
           EN
         </a>
       </div>
 
+      <!-- Theme Toggle -->
+      <div class="mr-8">
+        <ThemeToggle />
+      </div>
+
       <!-- Botón contactar destacado -->
       <a 
         href={text.contactHref}
-        class="contact-btn px-4 py-2 bg-black text-white text-xs font-medium tracking-wide rounded-full hover:bg-gray-800 transition-all duration-200"
+        class="contact-btn px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-xs font-medium tracking-wide rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-200"
       >
         {text.contact}
       </a>
@@ -82,7 +91,18 @@ const currentPath = Astro.url.pathname;
   </nav>
 
   <!-- Mobile: header flotante simplificado -->
-  <nav class="md:hidden flex items-center px-4 py-3 bg-white/80 backdrop-blur-md rounded-full border border-gray-200/50 shadow-lg shadow-black/5">
+  <nav class="md:hidden flex items-center px-4 py-3 rounded-full border shadow-lg shadow-black/5 dark:shadow-white/5" style="background-color: rgba(255, 255, 255, 0.1); border-color: rgba(229, 231, 235, 0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+    <style>
+      nav:last-of-type {
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      }
+      
+      :root.dark nav:last-of-type {
+        background-color: rgba(42, 42, 42, 0.1) !important;
+        border-color: rgba(50, 50, 50, 0.2) !important;
+      }
+    </style>
     <!-- Logo -->
     <a href={text.homeHref} class="logo-link">
       <div class="w-8 h-8 bg-black rounded-sm flex items-center justify-center">
@@ -92,30 +112,34 @@ const currentPath = Astro.url.pathname;
 
     <!-- Hamburger button -->
     <button class="mobile-menu-btn ml-4 p-2">
-      <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
   </nav>
 
   <!-- Menu móvil desplegable flotante -->
-  <div class="mobile-menu hidden md:hidden absolute top-full left-0 right-0 mt-4 mx-4 bg-white/90 backdrop-blur-md rounded-2xl border border-gray-200/50 shadow-xl shadow-black/10 overflow-hidden">
-    <div class="p-6 space-y-4">
-      <a 
-        href={text.homeHref}
-        class="block text-sm font-medium text-gray-900 tracking-wide hover:text-gray-600 transition-colors"
-      >
-        {text.home}
-      </a>
+  <div class="mobile-menu hidden md:hidden absolute top-full left-0 right-0 mt-4 mx-4 rounded-2xl border shadow-xl shadow-black/10 dark:shadow-white/10 overflow-hidden" style="background-color: rgba(255, 255, 255, 0.1); border-color: rgba(229, 231, 235, 0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+    <style>
+      .mobile-menu {
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      }
       
+      :root.dark .mobile-menu {
+        background-color: rgba(42, 42, 42, 0.1) !important;
+        border-color: rgba(50, 50, 50, 0.2) !important;
+      }
+    </style>
+    <div class="px-4 py-6 space-y-4">
       <!-- Language Toggle Mobile -->
       <div class="flex items-center justify-between">
-        <span class="text-sm text-gray-500">{lang === 'es' ? 'Idioma:' : 'Language:'}</span>
+        <span class="text-sm text-gray-500 dark:text-gray-400">{lang === 'es' ? 'Idioma:' : 'Language:'}</span>
         <div class="flex items-center space-x-1">
           <a 
             href={currentPath.replace('/en', '') || '/'}
             class={`text-sm px-3 py-1 rounded-full transition-all ${
-              lang === 'es' ? 'bg-gray-100 font-medium text-gray-900' : 'text-gray-600 hover:bg-gray-50'
+              lang === 'es' ? 'bg-gray-100 dark:bg-gray-800 font-medium text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
             }`}
           >
             ES
@@ -123,7 +147,7 @@ const currentPath = Astro.url.pathname;
           <a 
             href={`/en${currentPath === '/' ? '' : currentPath}`}
             class={`text-sm px-3 py-1 rounded-full transition-all ${
-              lang === 'en' ? 'bg-gray-100 font-medium text-gray-900' : 'text-gray-600 hover:bg-gray-50'
+              lang === 'en' ? 'bg-gray-100 dark:bg-gray-800 font-medium text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
             }`}
           >
             EN
@@ -131,9 +155,15 @@ const currentPath = Astro.url.pathname;
         </div>
       </div>
 
+      <!-- Theme Toggle Mobile -->
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-gray-500 dark:text-gray-400">{lang === 'es' ? 'Tema:' : 'Theme:'}</span>
+        <ThemeToggle />
+      </div>
+
       <a 
         href={text.contactHref}
-        class="block w-full text-center py-3 bg-black text-white text-sm font-medium tracking-wide rounded-full hover:bg-gray-800 transition-all"
+        class="block w-full text-center py-3 bg-black dark:bg-white text-white dark:text-black text-sm font-medium tracking-wide rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-all"
       >
         {text.contact}
       </a>

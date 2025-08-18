@@ -168,23 +168,25 @@ class LiquidGlassEffect {
   
   setupRenderer(): void {
     try {
-      // Intentar WebGL 2 primero, luego WebGL 1 como fallback
-      const gl = this.canvas.getContext('webgl2', { 
+      // Detectar si es un dispositivo móvil para ajustar calidad
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isLowEnd = navigator.hardwareConcurrency <= 4;
+      
+      // Configuración adaptativa de contexto WebGL
+      const contextOptions = {
         alpha: true, 
-        antialias: true,
-        powerPreference: 'high-performance',
+        antialias: !isMobile, // Desactivar antialiasing en móvil
+        powerPreference: isMobile ? 'default' : 'high-performance',
         preserveDrawingBuffer: false,
         stencil: false,
-        depth: true
-      }) || this.canvas.getContext('webgl', { 
-        alpha: true, 
-        antialias: true,
-        powerPreference: 'high-performance'
-      }) || this.canvas.getContext('experimental-webgl', { 
-        alpha: true, 
-        antialias: true,
-        powerPreference: 'high-performance'
-      });
+        depth: true,
+        failIfMajorPerformanceCaveat: isMobile // Fallar si hay problemas de rendimiento en móvil
+      };
+      
+      // Intentar WebGL 2 primero, luego WebGL 1 como fallback
+      const gl = this.canvas.getContext('webgl2', contextOptions) || 
+                 this.canvas.getContext('webgl', contextOptions) || 
+                 this.canvas.getContext('experimental-webgl', contextOptions);
       
       if (!gl) {
         throw new Error('No se pudo obtener contexto WebGL');
@@ -193,6 +195,7 @@ class LiquidGlassEffect {
       // Verificar qué versión de WebGL tenemos
       const isWebGL2 = gl instanceof WebGL2RenderingContext;
       console.log(`WebGL ${isWebGL2 ? '2' : '1'} Context created successfully:`, gl.constructor.name);
+      console.log(`Device: ${isMobile ? 'Mobile' : 'Desktop'}, CPU cores: ${navigator.hardwareConcurrency}`);
       
       // Crear renderer con el contexto obtenido
       this.renderer = new THREE.WebGLRenderer({
@@ -200,17 +203,18 @@ class LiquidGlassEffect {
         canvas: this.canvas
       });
       
-      // Configuraciones adicionales para performance
-      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      // Configuraciones de performance adaptativas
+      const pixelRatioLimit = isMobile ? 1.5 : 2; // Menor resolución en móvil
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, pixelRatioLimit));
       
-      // Solo usar SRGBColorSpace si es WebGL 2
-      if (isWebGL2) {
+      // Solo usar SRGBColorSpace si es WebGL 2 y no es dispositivo de gama baja
+      if (isWebGL2 && !isLowEnd) {
         this.renderer.outputColorSpace = THREE.SRGBColorSpace;
       }
       
       this.updateSize();
       
-      console.log(`Three.js Renderer initialized successfully with WebGL ${isWebGL2 ? '2' : '1'}!`);
+      console.log(`Three.js Renderer initialized with optimizations for ${isMobile ? 'mobile' : 'desktop'}`);
     } catch (error) {
       console.error('WebGL renderer failed to initialize:', error);
       this.fallbackToCSS();
@@ -270,52 +274,69 @@ class LiquidGlassEffect {
       // Crear un fondo procedural más elaborado
       const isDark = document.documentElement.classList.contains('dark');
       
-      // Fondo base MÁS CONTRASTANTE para ver mejor la distorsión
+      // Fondo base NEUTRO para elegancia consistente
       if (isDark) {
-        tempCtx.fillStyle = '#0f172a'; // Azul muy oscuro
+        tempCtx.fillStyle = '#1a1a1a'; // Gris neutro oscuro - elimina agresividad del azul
       } else {
         tempCtx.fillStyle = '#ffffff'; // Blanco puro
       }
       tempCtx.fillRect(0, 0, width, height);
       
-      // GRADIENTES NEUTROS para mejor visibilidad sin muchos colores
-      const gradient1 = tempCtx.createRadialGradient(
-        width * 0.2, height * 0.2, 0,
-        width * 0.2, height * 0.2, width * 0.6
+      // GRADIENTES DE PROFUNDIDAD para efecto de vidrio grueso
+      
+      // Gradiente principal con efecto de profundidad
+      const depthGradient = tempCtx.createRadialGradient(
+        width * 0.5, height * 0.5, 0,
+        width * 0.5, height * 0.5, Math.max(width, height) * 0.8
       );
       
       if (isDark) {
-        gradient1.addColorStop(0, 'rgba(255, 255, 255, 0.15)'); // Blanco sutil
-        gradient1.addColorStop(0.5, 'rgba(255, 255, 255, 0.08)'); // Blanco más sutil
-        gradient1.addColorStop(1, 'transparent');
+        // MUCH MORE SUBTLE - similar opacity range to light mode
+        depthGradient.addColorStop(0, 'rgba(255, 255, 255, 0.08)'); // Reducido de 0.2 a 0.08
+        depthGradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.05)'); // Reducido de 0.12 a 0.05
+        depthGradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.03)'); // Reducido de 0.06 a 0.03
+        depthGradient.addColorStop(1, 'rgba(255, 255, 255, 0.01)'); // Reducido de 0.02 a 0.01
       } else {
-        gradient1.addColorStop(0, 'rgba(0, 0, 0, 0.08)'); // Negro muy sutil
-        gradient1.addColorStop(0.5, 'rgba(0, 0, 0, 0.04)'); // Negro más sutil
-        gradient1.addColorStop(1, 'transparent');
+        depthGradient.addColorStop(0, 'rgba(0, 0, 0, 0.1)');
+        depthGradient.addColorStop(0.3, 'rgba(0, 0, 0, 0.06)');
+        depthGradient.addColorStop(0.7, 'rgba(0, 0, 0, 0.03)');
+        depthGradient.addColorStop(1, 'rgba(0, 0, 0, 0.01)');
       }
       
-      tempCtx.fillStyle = gradient1;
+      tempCtx.fillStyle = depthGradient;
       tempCtx.fillRect(0, 0, width, height);
       
-      // SEGUNDO GRADIENTE NEUTRO para más complejidad visual
-      const gradient2 = tempCtx.createRadialGradient(
-        width * 0.8, height * 0.8, 0,
-        width * 0.8, height * 0.8, width * 0.4
-      );
+      // Gradientes de esquina para simular grosor de vidrio
+      const cornerGradients = [
+        { x: 0, y: 0, size: 0.4 }, // Top-left
+        { x: width, y: 0, size: 0.3 }, // Top-right  
+        { x: 0, y: height, size: 0.3 }, // Bottom-left
+        { x: width, y: height, size: 0.35 } // Bottom-right
+      ];
       
-      if (isDark) {
-        gradient2.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
-        gradient2.addColorStop(1, 'transparent');
-      } else {
-        gradient2.addColorStop(0, 'rgba(0, 0, 0, 0.06)');
-        gradient2.addColorStop(1, 'transparent');
-      }
+      cornerGradients.forEach(corner => {
+        const cornerGrad = tempCtx.createRadialGradient(
+          corner.x, corner.y, 0,
+          corner.x, corner.y, Math.min(width, height) * corner.size
+        );
+        
+        if (isDark) {
+          // MUCH MORE SUBTLE corner gradients - matching light mode elegance
+          cornerGrad.addColorStop(0, 'rgba(255, 255, 255, 0.06)'); // Reducido de 0.15 a 0.06
+          cornerGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.03)'); // Reducido de 0.08 a 0.03
+          cornerGrad.addColorStop(1, 'transparent');
+        } else {
+          cornerGrad.addColorStop(0, 'rgba(0, 0, 0, 0.08)');
+          cornerGrad.addColorStop(0.5, 'rgba(0, 0, 0, 0.04)');
+          cornerGrad.addColorStop(1, 'transparent');
+        }
+        
+        tempCtx.fillStyle = cornerGrad;
+        tempCtx.fillRect(0, 0, width, height);
+      });
       
-      tempCtx.fillStyle = gradient2;
-      tempCtx.fillRect(0, 0, width, height);
-      
-      // PATRÓN GEOMÉTRICO para mejor tracking de distorsión
-      tempCtx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+      // PATRÓN GEOMÉTRICO para mejor tracking de distorsión - más sutil en dark mode
+      tempCtx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.05)'; // Reducido de 0.1 a 0.04
       tempCtx.lineWidth = 1;
       
       // Grid pattern para ver la distorsión claramente
@@ -338,7 +359,7 @@ class LiquidGlassEffect {
       const data = imageData.data;
       
       for (let i = 0; i < data.length; i += 4) {
-        const noise = (Math.random() - 0.5) * (isDark ? 8 : 4);
+        const noise = (Math.random() - 0.5) * (isDark ? 3 : 4); // Reducido de 8 a 3 para dark mode
         data[i] += noise;     // R
         data[i + 1] += noise; // G
         data[i + 2] += noise; // B
@@ -375,6 +396,10 @@ class LiquidGlassEffect {
       console.error('No background texture available for material');
       return;
     }
+    
+    // Detectar dispositivo para ajustar calidad del shader
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isLowEnd = navigator.hardwareConcurrency <= 4;
     
     const vertexShader = `
       varying vec2 vUv;
@@ -430,95 +455,153 @@ class LiquidGlassEffect {
         return value;
       }
       
+      // Función para calcular la distancia a los bordes
+      float edgeDistance(vec2 uv) {
+        vec2 d = abs(uv - 0.5) * 2.0; // Normalizar a [0,1] desde el centro
+        return min(1.0 - max(d.x, d.y), 1.0); // Distancia a los bordes
+      }
+      
+      // Función para efecto de grosor de vidrio
+      float glassThickness(vec2 uv) {
+        float edge = edgeDistance(uv);
+        return smoothstep(0.7, 1.0, edge); // Solo en los bordes
+      }
+      
       void main() {
         vec2 uv = vUv;
         
-        // LIQUID GLASS DRAMÁTICO - mucho más visible
-        float time = uTime * 1.2; // Más rápido
+        // CÁLCULO DE PROFUNDIDAD DE VIDRIO
+        float edge = edgeDistance(uv);
+        float thickness = glassThickness(uv);
+        float centerToEdge = 1.0 - edge; // Mayor en los bordes
         
-        // ONDAS GRANDES Y VISIBLES
-        float wave1 = sin(uv.x * 3.0 + time * 2.0) * 0.05; // 6x más fuerte
-        float wave2 = sin(uv.y * 2.5 + time * 1.8) * 0.04;
-        float wave3 = sin((uv.x + uv.y) * 4.0 + time * 2.5) * 0.03;
-        float wave4 = sin((uv.x - uv.y) * 5.0 + time * 1.5) * 0.025;
+        // LIQUID GLASS DRAMÁTICO - más intenso en bordes
+        float time = uTime * 1.2;
         
-        // LIQUID RIPPLES - ondas concéntricas como gotas de agua
+        // ONDAS CON INTENSIDAD BASADA EN PROFUNDIDAD
+        float waveIntensity = 1.0 + centerToEdge * 2.0; // 3x más fuerte en bordes
+        float wave1 = sin(uv.x * 3.0 + time * 2.0) * 0.05 * waveIntensity;
+        float wave2 = sin(uv.y * 2.5 + time * 1.8) * 0.04 * waveIntensity;
+        float wave3 = sin((uv.x + uv.y) * 4.0 + time * 2.5) * 0.03 * waveIntensity;
+        float wave4 = sin((uv.x - uv.y) * 5.0 + time * 1.5) * 0.025 * waveIntensity;
+        
+        // DISTORSIÓN DE BORDES - EFECTO VIDRIO CURVADO
+        vec2 borderDistortion = vec2(0.0);
+        
+        // Distorsión horizontal en bordes izquierdo/derecho
+        if (uv.x < 0.1) {
+          float edgeStrength = (0.1 - uv.x) * 10.0; // Más fuerte cerca del borde
+          borderDistortion.x += sin(uv.y * 8.0 + time * 2.0) * 0.02 * edgeStrength;
+          borderDistortion.y += cos(uv.y * 6.0 + time * 1.5) * 0.015 * edgeStrength;
+        }
+        if (uv.x > 0.9) {
+          float edgeStrength = (uv.x - 0.9) * 10.0;
+          borderDistortion.x -= sin(uv.y * 8.0 + time * 2.0) * 0.02 * edgeStrength;
+          borderDistortion.y += cos(uv.y * 6.0 + time * 1.5) * 0.015 * edgeStrength;
+        }
+        
+        // Distorsión vertical en bordes superior/inferior
+        if (uv.y < 0.1) {
+          float edgeStrength = (0.1 - uv.y) * 10.0;
+          borderDistortion.y += sin(uv.x * 8.0 + time * 2.2) * 0.02 * edgeStrength;
+          borderDistortion.x += cos(uv.x * 6.0 + time * 1.7) * 0.015 * edgeStrength;
+        }
+        if (uv.y > 0.9) {
+          float edgeStrength = (uv.y - 0.9) * 10.0;
+          borderDistortion.y -= sin(uv.x * 8.0 + time * 2.2) * 0.02 * edgeStrength;
+          borderDistortion.x += cos(uv.x * 6.0 + time * 1.7) * 0.015 * edgeStrength;
+        }
+        
+        // LIQUID RIPPLES - más intensos en bordes
         vec2 center1 = vec2(0.3, 0.7);
         vec2 center2 = vec2(0.7, 0.3);
         float dist1 = length(uv - center1);
         float dist2 = length(uv - center2);
         
-        float ripple1 = sin(dist1 * 15.0 - time * 3.0) * exp(-dist1 * 2.0) * 0.04;
-        float ripple2 = sin(dist2 * 12.0 - time * 2.5) * exp(-dist2 * 1.8) * 0.035;
+        float ripple1 = sin(dist1 * 15.0 - time * 3.0) * exp(-dist1 * 2.0) * 0.04 * waveIntensity;
+        float ripple2 = sin(dist2 * 12.0 - time * 2.5) * exp(-dist2 * 1.8) * 0.035 * waveIntensity;
         
-        // RUIDO LÍQUIDO ORGÁNICO MÁS FUERTE
-        float liquidNoise = fbm(uv * 1.5 + time * 0.3) * 0.06; // 6x más fuerte
+        // RUIDO LÍQUIDO ORGÁNICO - más denso en bordes
+        float liquidNoise = fbm(uv * 1.5 + time * 0.3) * 0.06 * waveIntensity;
         
-        // DISTORSIÓN COMBINADA DRAMÁTICA
+        // DISTORSIÓN COMBINADA CON EFECTOS DE BORDE
         vec2 distortion = vec2(
           wave1 + wave3 + ripple1 + liquidNoise,
           wave2 + wave4 + ripple2 + liquidNoise * 0.9
-        ) * uDistortionStrength * 3.0; // 3x multiplicador extra
+        ) * uDistortionStrength * 3.0 + borderDistortion;
         
-        // Aplicar distorsión FUERTE
+        // Aplicar distorsión final
         vec2 distortedUV = uv + distortion;
         
-        // REFRACCIÓN SUTIL pero visible - menos colorida
-        float aberration = 0.008 * uDistortionStrength; // Reducido para menos color
+        // REFRACCIÓN INTENSIFICADA EN BORDES
+        float aberration = 0.008 * uDistortionStrength * (1.0 + centerToEdge * 2.0);
         
-        // Muestreo principalmente normal con ligera aberración
+        // Muestreo con aberración cromática más pronunciada en bordes
         vec3 mainSample = texture2D(uBackground, distortedUV).rgb;
-        float r = texture2D(uBackground, distortedUV + vec2(aberration * 0.5, 0.0)).r;
-        float b = texture2D(uBackground, distortedUV - vec2(aberration * 0.5, 0.0)).b;
+        float r = texture2D(uBackground, distortedUV + vec2(aberration, 0.0)).r;
+        float g = texture2D(uBackground, distortedUV + vec2(aberration * 0.5, aberration * 0.3)).g;
+        float b = texture2D(uBackground, distortedUV - vec2(aberration, 0.0)).b;
         
-        // Mix sutil con el sample principal para menos separación de colores
-        vec3 refractionColor = mix(mainSample, vec3(r, mainSample.g, b), 0.3);
+        // Mix más pronunciado en los bordes para mejor efecto de profundidad
+        float refractionMix = 0.3 + centerToEdge * 0.4; // Hasta 0.7 en bordes
+        vec3 refractionColor = mix(mainSample, vec3(r, g, b), refractionMix);
         
-        // LIQUID SURFACE HIGHLIGHTS VISIBLES
+        // FRESNEL INTENSIFICADO EN BORDES para profundidad
+        vec3 normal = normalize(vec3(uv - 0.5, 0.2 + thickness * 0.5));
+        float fresnel = pow(1.0 - abs(dot(normal, vec3(0.0, 0.0, 1.0))), 2.0 + centerToEdge * 2.0);
+        fresnel *= 0.8 + centerToEdge * 0.4; // Más intenso en bordes
+        
+        // LIQUID SURFACE HIGHLIGHTS - más visibles en bordes
         float surface1 = sin(time * 1.5 + uv.x * 12.0) * sin(time * 1.8 + uv.y * 10.0);
         float surface2 = sin(time * 0.8 + (uv.x + uv.y) * 8.0);
         float surface3 = fbm(uv * 4.0 + time * 0.4);
         
-        float highlight = (surface1 * surface2 * surface3) * 0.3 + 0.2; // Mucho más visible
+        float highlight = (surface1 * surface2 * surface3) * (0.3 + centerToEdge * 0.3) + 0.2;
         highlight = smoothstep(0.0, 1.0, highlight);
         
-        // FRESNEL EFFECT DRAMÁTICO
-        float fresnel = pow(1.0 - abs(dot(normalize(vec3(uv - 0.5, 0.2)), vec3(0.0, 0.0, 1.0))), 3.0);
-        fresnel *= 0.8;
-        
-        // LIQUID CAUSTICS - patrones de luz refractada
+        // CAUSTICS INTENSIFICADOS EN BORDES
         float caustic1 = sin(uv.x * 20.0 + time * 2.0) * sin(uv.y * 15.0 + time * 1.7);
         float caustic2 = sin((uv.x + uv.y) * 25.0 + time * 2.5);
-        float caustics = (caustic1 * caustic2) * 0.15;
+        float caustics = (caustic1 * caustic2) * (0.15 + centerToEdge * 0.2);
         caustics = smoothstep(0.5, 1.0, caustics + 0.5);
         
-        // COLOR FINAL CON TRANSICIÓN SUAVE ENTRE TEMAS
+        // EFECTO DE GROSOR DE VIDRIO EN BORDES
+        float glassHighlight = smoothstep(0.8, 1.0, edge) * 0.4; // Brillo en los bordes
         
-        // Colores base que cambian con el tema
-        vec3 lightHighlight = vec3(1.0, 1.0, 1.0); // Blanco para light mode
-        vec3 darkHighlight = vec3(0.95, 0.95, 1.0); // Ligeramente azulado para dark mode
-        
+        // COLOR FINAL CON PROFUNDIDAD Y TRANSICIÓN DE TEMA - más elegante en dark mode
+        vec3 lightHighlight = vec3(1.0, 1.0, 1.0); // Blanco puro para light mode
+        vec3 darkHighlight = vec3(0.15, 0.16, 0.17); // Gris muy oscuro con ligero tinte para dark mode
         vec3 currentHighlight = mix(lightHighlight, darkHighlight, uThemeTransition);
         
-        // Aplicar highlights con transición
-        vec3 finalColor = mix(refractionColor, currentHighlight, (highlight + fresnel + caustics) * 0.3);
+        // Intensidad de efectos más sutil en dark mode
+        float effectIntensity = mix(0.4, 0.25, uThemeTransition); // Reducir intensidad en dark mode
         
-        // Brillo que también cambia con el tema
+        // Aplicar todos los efectos con intensidad adaptativa
+        vec3 finalColor = mix(
+          refractionColor, 
+          currentHighlight, 
+          (highlight + fresnel + caustics + glassHighlight) * effectIntensity
+        );
+        
+        // Brillo de superficie más pronunciado en bordes
         float gloss = sin(time * 0.5 + uv.x * 8.0) * sin(time * 0.7 + uv.y * 6.0) * 0.1 + 0.1;
         gloss *= smoothstep(0.4, 0.6, fbm(uv * 2.0 + time * 0.1));
+        gloss *= 1.0 + centerToEdge * 0.5; // Más gloss en bordes
         
-        // Color del brillo que transiciona suavemente
-        vec3 lightGloss = vec3(1.0, 1.0, 1.0);
-        vec3 darkGloss = vec3(0.9, 0.95, 1.0);
+        // Color del brillo más sutil en dark mode
+        vec3 lightGloss = vec3(1.0, 1.0, 1.0); // Blanco puro para light mode
+        vec3 darkGloss = vec3(0.12, 0.13, 0.14); // Negro claro con ligero tinte para dark mode
         vec3 currentGloss = mix(lightGloss, darkGloss, uThemeTransition);
         
-        finalColor = mix(finalColor, currentGloss, gloss * fresnel * 0.2);
+        // Intensidad de gloss más sutil en dark mode
+        float glossIntensity = mix(0.3, 0.15, uThemeTransition); // Reducir en dark mode
+        finalColor = mix(finalColor, currentGloss, gloss * fresnel * glossIntensity);
         
-        // Alpha que también transiciona
-        float baseAlpha = mix(0.88, 0.82, uThemeTransition); // Más opaco en dark mode
-        float alpha = baseAlpha + fresnel * 0.15;
+        // Alpha más consistente entre temas
+        float baseAlpha = mix(0.88, 0.85, uThemeTransition); // Menos diferencia entre temas
+        float depthAlpha = baseAlpha + fresnel * 0.15 + centerToEdge * 0.08; // Efecto más sutil en bordes
         
-        gl_FragColor = vec4(finalColor, alpha);
+        gl_FragColor = vec4(finalColor, depthAlpha);
       }
     `;
     
@@ -530,14 +613,16 @@ class LiquidGlassEffect {
           uBackground: { value: this.backgroundTexture },
           uTime: { value: 0.0 },
           uResolution: { value: new THREE.Vector2() },
-          uDistortionStrength: { value: 2.0 }, // 2.5x más fuerte para efecto dramático
+          uDistortionStrength: { value: isMobile ? 1.8 : 2.5 }, // Reducir en móvil para mejor performance
           uThemeTransition: { value: 0.0 }, // 0.0 = light, 1.0 = dark
           uBaseColor: { value: new THREE.Vector3(1.0, 1.0, 1.0) },
           uHighlightColor: { value: new THREE.Vector3(1.0, 1.0, 1.0) }
         },
         transparent: true,
         blending: THREE.NormalBlending,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+        depthWrite: false, // Mejor blending para efecto de vidrio
+        depthTest: true
       });
       
       console.log('Liquid glass material created successfully');

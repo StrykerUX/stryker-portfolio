@@ -32,7 +32,7 @@ const currentPath = Astro.url.pathname;
 <!-- Header flotante glassmorphism -->
 <header class="header fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
   <!-- Desktop: header flotante liquid glass WebGL -->
-  <LiquidGlass className="hidden md:flex items-center pl-6 pr-3 py-3 rounded-full border shadow-xl">
+  <LiquidGlass className="hidden md:flex items-center pl-6 pr-3 py-3 rounded-full border border-white/20 dark:border-transparent shadow-xl">
     <nav class="flex items-center w-full">
     <style>
       .glassmorphism {
@@ -214,7 +214,7 @@ const currentPath = Astro.url.pathname;
   </LiquidGlass>
 
   <!-- Mobile: header flotante simplificado -->
-  <LiquidGlass className="md:hidden flex items-center px-4 py-3 rounded-full border shadow-xl">
+  <LiquidGlass className="md:hidden flex items-center px-4 py-3 rounded-full border border-white/20 dark:border-transparent shadow-xl">
     <nav class="flex items-center w-full">
     <!-- Logo -->
     <a href={text.homeHref} class="logo-link">
@@ -233,7 +233,7 @@ const currentPath = Astro.url.pathname;
   </LiquidGlass>
 
   <!-- Menu móvil desplegable flotante -->
-  <LiquidGlass className="mobile-menu hidden md:hidden absolute top-full left-0 right-0 mt-4 mx-4 rounded-2xl border shadow-xl overflow-hidden">
+  <LiquidGlass className="mobile-menu hidden md:hidden absolute top-full left-0 right-0 mt-4 mx-4 rounded-2xl border border-white/20 dark:border-transparent shadow-xl overflow-hidden">
     <div class="px-4 py-6 space-y-4">
       <!-- Language Toggle Mobile -->
       <div class="flex items-center justify-between">

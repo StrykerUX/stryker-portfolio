@@ -5,6 +5,7 @@ export interface Project {
   category: string;
   tags: string[];
   image: string;
+  hoverVideo?: string; // OPCIONAL: URL de YouTube para video hover (ej: 'https://youtu.be/dxUyH-GCNa0')
   year: string;
   client: string;
   description: {
@@ -21,18 +22,18 @@ export interface Project {
 
 export const categories = {
   es: [
-    { id: 'todos', label: 'all categories', count: 9 },
-    { id: 'ux-ui', label: 'desarrollo UX', count: 3 },
-    { id: 'diseno-unico', label: 'diseño único', count: 2 },
-    { id: 'branding', label: 'diseño web', count: 2 },
+    { id: 'todos', label: 'all categories', count: 15 },
+    { id: 'ux-ui', label: 'desarrollo UX', count: 5 },
+    { id: 'diseno-unico', label: 'diseño único', count: 4 },
+    { id: 'branding', label: 'diseño web', count: 4 },
     { id: 'experiencia-3d', label: 'experiencia 3d', count: 1 },
     { id: 'motion', label: 'motion', count: 1 }
   ],
   en: [
-    { id: 'todos', label: 'all categories', count: 9 },
-    { id: 'ux-ui', label: 'UX development', count: 3 },
-    { id: 'diseno-unico', label: 'unique design', count: 2 },
-    { id: 'branding', label: 'web design', count: 2 },
+    { id: 'todos', label: 'all categories', count: 15 },
+    { id: 'ux-ui', label: 'UX development', count: 5 },
+    { id: 'diseno-unico', label: 'unique design', count: 4 },
+    { id: 'branding', label: 'web design', count: 4 },
     { id: 'experiencia-3d', label: '3d experience', count: 1 },
     { id: 'motion', label: 'motion', count: 1 }
   ]
@@ -45,7 +46,8 @@ export const projects: Project[] = [
     subtitle: 'Optimización completa de la experiencia de usuario',
     category: 'ux-ui',
     tags: ['UX Research', 'UI Design', 'Conversion Optimization', 'User Testing'],
-    image: '/images/projects/trove-ux-ui.jpg',
+    image: 'https://storage.novalabss.app/u/Trove%20Onboarding%20Mock01.jpg',
+    hoverVideo: 'https://youtu.be/dxUyH-GCNa0',
     year: '2024',
     client: 'Trove Technologies',
     description: {
@@ -66,7 +68,7 @@ export const projects: Project[] = [
     subtitle: 'Plataforma de marketing integral',
     category: 'branding',
     tags: ['Web Design', 'Brand Identity', 'Marketing Platform'],
-    image: '/images/projects/wishpond.jpg',
+    image: 'https://storage.novalabss.app/u/Turn_on-01.jpg',
     year: '2024',
     client: 'Wishpond Technologies',
     description: {
@@ -82,7 +84,7 @@ export const projects: Project[] = [
     subtitle: 'Aplicación móvil de creatividad',
     category: 'ux-ui',
     tags: ['Mobile App', 'Creative Tools', 'User Interface'],
-    image: '/images/projects/kaleido.jpg',
+    image: 'https://storage.novalabss.app/u/Kaleido%20Mobile%20Mock010.jpg',
     year: '2023',
     client: 'Kaleido Creative',
     description: {
@@ -98,7 +100,7 @@ export const projects: Project[] = [
     subtitle: 'Agencia digital moderna',
     category: 'branding',
     tags: ['Agency Website', 'Portfolio Design', 'Team Showcase'],
-    image: '/images/projects/digital-crew.jpg',
+    image: 'https://storage.novalabss.app/u/ConferenceStrees.jpg',
     year: '2023',
     client: 'Digital Crew Agency',
     description: {
@@ -186,6 +188,102 @@ export const projects: Project[] = [
       en: 'Interface concept and motion graphics for video game focused on gaming usability.'
     },
     slug: 'apex-legends-concept',
+    featured: false
+  },
+  {
+    id: 'spotify-redesign',
+    title: 'SPOTIFY REDESIGN',
+    subtitle: 'Reimaginando la experiencia musical',
+    category: 'ux-ui',
+    tags: ['Music App', 'User Experience', 'Interface Design'],
+    image: '/images/projects/spotify-redesign.jpg',
+    year: '2024',
+    client: 'Concepto personal',
+    description: {
+      es: 'Rediseño conceptual de Spotify enfocado en mejorar la descubribilidad musical y la experiencia social.',
+      en: 'Conceptual redesign of Spotify focused on improving music discovery and social experience.'
+    },
+    slug: 'spotify-redesign',
+    featured: false
+  },
+  {
+    id: 'fintech-dashboard',
+    title: 'FINTECH DASHBOARD',
+    subtitle: 'Panel de control financiero',
+    category: 'ux-ui',
+    tags: ['Fintech', 'Dashboard', 'Data Visualization'],
+    image: '/images/projects/fintech-dashboard.jpg',
+    year: '2024',
+    client: 'FinTech Startup',
+    description: {
+      es: 'Dashboard completo para gestión financiera con enfoque en visualización de datos y usabilidad.',
+      en: 'Complete dashboard for financial management focused on data visualization and usability.'
+    },
+    slug: 'fintech-dashboard',
+    featured: false
+  },
+  {
+    id: 'luxury-hotel-brand',
+    title: 'LUXURY HOTEL BRAND',
+    subtitle: 'Identidad visual premium',
+    category: 'branding',
+    tags: ['Luxury Branding', 'Hospitality', 'Visual Identity'],
+    image: '/images/projects/luxury-hotel-brand.jpg',
+    year: '2023',
+    client: 'Luxury Hotels Group',
+    description: {
+      es: 'Desarrollo de identidad visual completa para cadena hotelera de lujo con enfoque en elegancia.',
+      en: 'Complete visual identity development for luxury hotel chain focused on elegance.'
+    },
+    slug: 'luxury-hotel-brand',
+    featured: false
+  },
+  {
+    id: 'crypto-wallet-ui',
+    title: 'CRYPTO WALLET UI',
+    subtitle: 'Interfaz de billetera cripto',
+    category: 'diseno-unico',
+    tags: ['Cryptocurrency', 'Wallet Design', 'Security'],
+    image: '/images/projects/crypto-wallet-ui.jpg',
+    year: '2023',
+    client: 'CryptoSecure',
+    description: {
+      es: 'Diseño de interfaz para billetera de criptomonedas con enfoque en seguridad y simplicidad.',
+      en: 'Interface design for cryptocurrency wallet focused on security and simplicity.'
+    },
+    slug: 'crypto-wallet-ui',
+    featured: false
+  },
+  {
+    id: 'food-delivery-app',
+    title: 'FOOD DELIVERY APP',
+    subtitle: 'Aplicación de entrega de comida',
+    category: 'ux-ui',
+    tags: ['Mobile App', 'Food Delivery', 'User Experience'],
+    image: '/images/projects/food-delivery-app.jpg',
+    year: '2023',
+    client: 'QuickEats',
+    description: {
+      es: 'Aplicación móvil para delivery de comida con UX optimizada para pedidos rápidos.',
+      en: 'Mobile app for food delivery with UX optimized for quick orders.'
+    },
+    slug: 'food-delivery-app',
+    featured: false
+  },
+  {
+    id: 'sustainable-fashion',
+    title: 'SUSTAINABLE FASHION',
+    subtitle: 'Moda sostenible moderna',
+    category: 'branding',
+    tags: ['Sustainable Fashion', 'E-commerce', 'Modern Design'],
+    image: '/images/projects/sustainable-fashion.jpg',
+    year: '2022',
+    client: 'EcoWear',
+    description: {
+      es: 'Plataforma e-commerce para moda sostenible con diseño moderno y consciente.',
+      en: 'E-commerce platform for sustainable fashion with modern and conscious design.'
+    },
+    slug: 'sustainable-fashion',
     featured: false
   }
 ];

@@ -60,7 +60,7 @@ const { lang = 'es' } = Astro.props;
 
           <!-- Link invisible para toda la tarjeta -->
           <a 
-            href={`/${lang === 'en' ? 'en/' : ''}proyecto/${project.slug}`}
+            href={`/${lang === 'en' ? 'en/project' : 'proyecto'}/${project.slug}`}
             class="absolute inset-0 z-10"
             aria-label={`Ver proyecto ${project.title}`}
           >

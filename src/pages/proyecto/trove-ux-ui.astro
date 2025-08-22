@@ -11,13 +11,13 @@ import Footer from '../../components/Footer.astro';
 >
   <Header lang="es" />
   
-  <main class="bg-white">
+  <main class="bg-white dark:bg-[#121212]">
     
     <!-- HEADER SECTION -->
-    <section class="pt-32 pb-24 text-center">
+    <section class="hero-section text-center">
       <div class="container mx-auto custom-padding" style="max-width: 1880px;">
         <!-- Título principal -->
-        <h1 class="title-main mb-6">
+        <h1 class="title-main title-spacing">
           TROVE
         </h1>
         
@@ -33,11 +33,11 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- SECCIÓN MÓVIL (Video) -->
-    <section class="py-16">
+    <section class="video-section">
       <div class="container mx-auto custom-padding" style="max-width: 1880px;">
         <div class="video-container">
           <iframe
-            src="https://www.youtube.com/embed/dxUyH-GCNa0?autoplay=1&mute=1&loop=1&playlist=dxUyH-GCNa0&controls=0&showinfo=0&rel=0&modestbranding=1"
+            src="https://www.youtube.com/embed/dxUyH-GCNa0?autoplay=1&mute=1&loop=1&playlist=dxUyH-GCNa0&controls=0&showinfo=0&rel=0&modestbranding=1&disablekb=1&iv_load_policy=3"
             title="Trove UX/UI Demo"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -49,18 +49,20 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- SECCIÓN PUNTO DE PARTIDA -->
-    <section class="py-20">
+    <section class="content-section">
       <div class="container mx-auto custom-padding" style="max-width: 1880px;">
         
         <!-- Título principal -->
-        <h2 class="section-title mb-12">
+        <h2 class="section-title section-title-spacing">
           PUNTO<br>DE PARTIDA
         </h2>
         
         <!-- Párrafo descriptivo principal -->
-        <div class="content-grid">
-          <div class="main-description">
-            <p class="description-main mb-10">
+        <div class="side-by-side-layout">
+          
+          <!-- Columna izquierda: Descripción del problema -->
+          <div class="text-content">
+            <p class="description-main description-spacing">
               Trove comenzó como una beta sin estructura ni estrategia clara, lo que afectaba su conversión, retención y adquisición de usuarios
             </p>
             
@@ -74,32 +76,631 @@ import Footer from '../../components/Footer.astro';
             </div>
           </div>
           
-          <!-- Grid de estadísticas -->
-          <div class="stats-grid">
-            <!-- Stat 1 -->
-            <div class="stat-item">
-              <div class="stat-number">9min</div>
-              <div class="stat-description">Tiempo promedio en<br>completar el onboarding</div>
-            </div>
-            
-            <!-- Stat 2 -->
-            <div class="stat-item">
-              <div class="stat-number">80%</div>
-              <div class="stat-description">Tasa de abandono en el<br>onboarding</div>
-            </div>
-            
-            <!-- Stat 3 -->
-            <div class="stat-item">
-              <div class="stat-number-double">
-                <span class="main-stat">75%</span>
-                <span class="secondary-stat">7/10</span>
+          <!-- Columna derecha: Grid de estadísticas -->
+          <div class="stats-container">
+            <!-- Grid 2x2 de estadísticas -->
+            <div class="stats-grid-2x2">
+              <!-- Stat 1 -->
+              <div class="stat-item stat-card">
+                <div class="stat-number">9min</div>
+                <div class="stat-description">Tiempo promedio en completar el onboarding</div>
               </div>
-              <div class="stat-description">
-                <span>Falsa expectativa del usuario</span>
-                <span>Tasa de Cancelación Temprana</span>
+              
+              <!-- Stat 2 -->
+              <div class="stat-item stat-card">
+                <div class="stat-number">80%</div>
+                <div class="stat-description">Tasa de abandono en el onboarding</div>
+              </div>
+              
+              <!-- Stat 3 -->
+              <div class="stat-item stat-card">
+                <div class="stat-number">75%</div>
+                <div class="stat-description">Falsa expectativa del usuario</div>
+              </div>
+              
+              <!-- Stat 4 -->
+              <div class="stat-item stat-card">
+                <div class="stat-number">7/10</div>
+                <div class="stat-description">Tasa de Cancelación Temprana</div>
               </div>
             </div>
           </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN EL RETO -->
+    <section class="content-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        
+        <!-- Título principal -->
+        <h2 class="section-title section-title-spacing">
+          EL RETO
+        </h2>
+        
+        <!-- Layout side by side: texto izquierda, imagen derecha -->
+        <div class="side-by-side-layout">
+          
+          <!-- Columna izquierda: Descripción del reto -->
+          <div class="text-content">
+            <p class="description-main description-spacing">
+              Transformar Trove en un producto claro, confiable y escalable, eliminando las fricciones en la experiencia de usuario que afectaban la conversión, la retención y la percepción del servicio.
+            </p>
+            
+            <!-- Texto secundario -->
+            <div class="secondary-text">
+              <p>El mayor desafío era reconstruir la experiencia del usuario desde la base, eliminando las fricciones que afectaban tanto la conversión como la retención del producto.</p>
+              
+              <p><strong>Objetivos claros y los componentes:</strong> Los datos y tasa de registro, eliminando las fricciones que afectaban sin reforzar la percepción de protección.</p>
+              
+              <p><strong>Confusión sobre el producto:</strong> Muchos usuarios lo veían como una tarjeta de crédito, cuando realmente era un sistema de crédito interno basado en suscripción.</p>
+              
+              <p><strong>Retención baja:</strong> Sin incentivos claros para que los usuarios continuaran después de su primer año.</p>
+            </div>
+          </div>
+          
+          <!-- Columna derecha: Imagen del producto -->
+          <div class="image-container">
+            <div class="project-image-large">
+              <img 
+                src="/images/projects/trove/trove-product-overview.jpg" 
+                alt="Trove Product Overview"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN MOMENTO DE RECONSTRUIR -->
+    <section class="content-section quote-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        <div class="quote-container">
+          <h2 class="quote-title">
+            ERA MOMENTO DE RECONSTRUIR<br>
+            LA EXPERIENCIA Y CONVERTIR<br>
+            A TROVE EN UN PRODUCTO<br>
+            SÓLIDO Y ESCALABLE
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PLAN DE ACCIÓN -->
+    <section class="content-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        
+        <!-- Título principal -->
+        <h2 class="section-title section-title-spacing">
+          PLAN<br>DE ACCIÓN
+        </h2>
+        
+        <!-- Descripción principal -->
+        <p class="description-main description-spacing">
+          La reestructuración de Trove se basó en cuatro pilares: mejorar el onboarding para aumentar conversión, rediseñar el sitio de marketing para educar al usuario, optimizar la webapp para fortalecer retención y establecer una estrategia SEO para adquirir clientes de forma orgánica.
+        </p>
+        
+        <!-- Grid de 4 pilares -->
+        <div class="pillars-grid">
+          
+          <!-- Pilar 1 -->
+          <div class="pillar-item">
+            <div class="pillar-number">01</div>
+            <h3 class="pillar-title">Optimización del Onboarding</h3>
+            <p class="pillar-description">La primera era una vía de los usuarios dirigida a través de un tiempo de finalización de 9 minutos y una tasa de abandono del 80%. Para hacer conversión, reestructuré el flujo, reduje la información, introduje guías visuales e integración una experiencia.</p>
+            <div class="pillar-tags">
+              <span class="tag">UX</span>
+              <span class="tag">Registro del flujo de usuario optimizado</span>
+              <span class="tag">Mejora de la experiencia de usuario sencilla</span>
+              <span class="tag">Conversión mejorada significativamente</span>
+              <span class="tag">UI</span>
+              <span class="tag">Reducción de formularios para mejorar confianza</span>
+              <span class="tag">Incorporación de un sistema de validaciones dinámicas</span>
+            </div>
+          </div>
+          
+          <!-- Pilar 2 -->
+          <div class="pillar-item">
+            <div class="pillar-number">02</div>
+            <h3 class="pillar-title">Rediseño de la Webapp</h3>
+            <p class="pillar-description">El dashboard y la interfaz interna no lograban retener a los usuarios, afectando la percepción del valor y la atención. Rediseñé la aplicación haciendo más dinámica, mejorado la presentación de datos y estableciendo la navegación intuitiva.</p>
+            <div class="pillar-tags">
+              <span class="tag">UX</span>
+              <span class="tag">Rediseñado de un sistema de navegación más intuitivo</span>
+              <span class="tag">Diseño de dashboards con información clara y rápida de interpretar</span>
+              <span class="tag">Implementación de una interfaz moderna y accesible.</span>
+              <span class="tag">UI</span>
+              <span class="tag">Diseño de una interfaz moderna y accesible, elevado van la identidad visual de Trove</span>
+              <span class="tag">Creación de gráficos de sistemas para una experiencia más atractiva.</span>
+              <span class="tag">Desarrollo del frontend con HTML, CSS, JavaScript y PHP.</span>
+              <span class="tag">Optimización del tiempo de carga del onboarding.</span>
+            </div>
+          </div>
+          
+          <!-- Pilar 3 -->
+          <div class="pillar-item">
+            <div class="pillar-number">03</div>
+            <h3 class="pillar-title">Rediseño del Sitio de Marketing</h3>
+            <p class="pillar-description">Muchos usuarios confundían el producto con una tarjeta de crédito tradicional y abandonaban antes de convertirse al funcionalidad real. Esto los llevó a crear comunicar claramente la propuesta de valor.</p>
+            <div class="pillar-tags">
+              <span class="tag">UX</span>
+              <span class="tag">Optimización de la arquitectura de información</span>
+              <span class="tag">Creación de secciones explicativas con copywriting orientado a conversión</span>
+              <span class="tag">Inclusión de elementos de confianza tecnológica, FAQ, certificaciones</span>
+              <span class="tag">UI</span>
+              <span class="tag">Creación completo del sitio con una jerarquía visual más clara</span>
+              <span class="tag">Mejora de la presentación de beneficios y funcionalidad del producto</span>
+              <span class="tag">Front End</span>
+              <span class="tag">Implementación de nuevos flujos en HTML, CSS y JavaScript</span>
+              <span class="tag">Optimización de elementos en la gestión de WordPress para una mejor demostración</span>
+            </div>
+          </div>
+          
+          <!-- Pilar 4 -->
+          <div class="pillar-item">
+            <div class="pillar-number">04</div>
+            <h3 class="pillar-title">Creación del Proyecto SEO</h3>
+            <p class="pillar-description">El costo de adquisición de usuarios era de mole estable debido al expensive más de inscripción, con más aplicada deudas registrados. Durante una estrategia de SEO para reducir la dependencia de publicidad pagada y reducir el dependence de publicidad paginas.</p>
+            <div class="pillar-tags">
+              <span class="tag">UX/UI</span>
+              <span class="tag">Análisis de palabras clave y definición de contenido estratégico</span>
+              <span class="tag">Optimización técnica del sitio para mejorar indexación y UX</span>
+              <span class="tag">Creación de landing pages con alta conversión orgánica</span>
+              <span class="tag">UXUI</span>
+              <span class="tag">Creación de estructuras de contenido optimizadas para SEO</span>
+              <span class="tag">Diseño de landing pages con foco en conversión orgánica</span>
+              <span class="tag">Diseño de componentes reutilizables para reducción de sites web</span>
+              <span class="tag">Implementación</span>
+              <span class="tag">Desarrollo en WordPress, con Elementor, usando HTML, CSS y PHP para una mayor personalización</span>
+              <span class="tag">Configuración de herramientas analíticas y SEO para monitoreo y optimización por SEO Keyword Sheets, sei import, sei y elementor</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN OPTIMIZACIÓN DEL ONBOARDING -->
+    <section class="content-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        
+        <!-- Título principal -->
+        <h2 class="section-title section-title-spacing">
+          Optimización del Onboarding
+        </h2>
+        
+        <!-- Layout side by side: texto izquierda, resultados derecha -->
+        <div class="side-by-side-layout">
+          
+          <!-- Columna izquierda: Descripción del proceso -->
+          <div class="text-content">
+            <p class="description-main description-spacing">
+              La primera era una vía de los usuarios dirigida a través de un tiempo de finalización de 9 minutos y una tasa de abandono del 80%. Para hacer conversión, reestructuré el flujo, reduje la información e integré una experiencia de confianza.
+            </p>
+            
+            <!-- Proceso detallado -->
+            <div class="secondary-text">
+              <p><strong>UX</strong></p>
+              <p>• Registro del flujo de usuario optimizado para reducir confusión.</p>
+              <p>• Mejora de la experiencia de usuario sencilla e intuitiva.</p>
+              <p>• Conversión mejorada significativamente.</p>
+              
+              <p><strong>UI</strong></p>
+              <p>• Reducción de formularios para mejorar confianza.</p>
+              <p>• Incorporación de un sistema de validaciones dinámicas.</p>
+              
+              <p><strong>Front End</strong></p>
+              <p>• Implementación de nuevos flujos en HTML, CSS y JavaScript.</p>
+              <p>• Optimización del tiempo de carga del onboarding.</p>
+            </div>
+          </div>
+          
+          <!-- Columna derecha: Resultados -->
+          <div class="results-container">
+            <div class="results-grid">
+              
+              <!-- Resultado 1 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">9min</span>
+                  <span class="result-description">Tiempo promedio completar onboarding</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">4min</span>
+                  <span class="result-description">55% reducción tiempo</span>
+                </div>
+              </div>
+              
+              <!-- Resultado 2 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">20%</span>
+                  <span class="result-description">Conversión</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">60%</span>
+                  <span class="result-description">200% mejora conversión</span>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Mockups del onboarding -->
+        <div class="mockups-section">
+          <div class="mockups-grid">
+            
+            <!-- Mockup 1 -->
+            <div class="mockup-item">
+              <div class="mockup-image">
+                <img 
+                  src="/images/projects/trove/onboarding-before.jpg" 
+                  alt="Onboarding Before"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="mockup-caption">
+                <span class="mockup-label">Antes</span>
+                <span class="mockup-description">Proceso largo y confuso de 9 minutos</span>
+              </div>
+            </div>
+            
+            <!-- Mockup 2 -->
+            <div class="mockup-item">
+              <div class="mockup-image">
+                <img 
+                  src="/images/projects/trove/onboarding-after.jpg" 
+                  alt="Onboarding After"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="mockup-caption">
+                <span class="mockup-label">Después</span>
+                <span class="mockup-description">Flujo optimizado con guías visuales</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN REDISEÑO DE LA WEBAPP -->
+    <section class="content-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        
+        <!-- Título principal -->
+        <h2 class="section-title section-title-spacing">
+          Rediseño de la Webapp
+        </h2>
+        
+        <!-- Descripción principal -->
+        <p class="description-main description-spacing">
+          El dashboard y la interfaz interna no lograban retener a los usuarios, afectando la percepción del valor y la atención. Rediseñé la aplicación haciendo más dinámica, mejorado la presentación de datos y estableciendo la navegación intuitiva.
+        </p>
+        
+        <!-- Proceso detallado -->
+        <div class="process-section">
+          <div class="process-grid">
+            
+            <!-- UX -->
+            <div class="process-item">
+              <h3 class="process-title">UX</h3>
+              <ul class="process-list">
+                <li>Rediseñado de un sistema de navegación más intuitivo.</li>
+                <li>Diseño de dashboards con información clara y rápida de interpretar.</li>
+                <li>Implementación de una interfaz moderna y accesible.</li>
+              </ul>
+            </div>
+            
+            <!-- UI -->
+            <div class="process-item">
+              <h3 class="process-title">UI</h3>
+              <ul class="process-list">
+                <li>Diseño de una interfaz moderna y accesible, elevado la identidad visual de Trove.</li>
+                <li>Creación de gráficos de sistemas para una experiencia más atractiva.</li>
+                <li>Desarrollo del frontend con HTML, CSS, JavaScript y PHP.</li>
+                <li>Optimización del tiempo de carga del onboarding.</li>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+        
+        <!-- Mockups de la webapp -->
+        <div class="webapp-mockups">
+          <div class="webapp-grid">
+            
+            <!-- Mockup 1 -->
+            <div class="webapp-item">
+              <div class="webapp-image">
+                <img 
+                  src="/images/projects/trove/webapp-dashboard.jpg" 
+                  alt="Webapp Dashboard"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            
+            <!-- Mockup 2 -->
+            <div class="webapp-item">
+              <div class="webapp-image">
+                <img 
+                  src="/images/projects/trove/webapp-mobile.jpg" 
+                  alt="Webapp Mobile"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            
+            <!-- Mockup 3 -->
+            <div class="webapp-item">
+              <div class="webapp-image">
+                <img 
+                  src="/images/projects/trove/webapp-interface.jpg" 
+                  alt="Webapp Interface"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN REDISEÑO DEL SITIO DE MARKETING -->
+    <section class="content-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        
+        <!-- Título principal -->
+        <h2 class="section-title section-title-spacing">
+          Rediseño del Sitio de Marketing
+        </h2>
+        
+        <!-- Layout side by side: texto izquierda, mockups derecha -->
+        <div class="side-by-side-layout">
+          
+          <!-- Columna izquierda: Descripción -->
+          <div class="text-content">
+            <p class="description-main description-spacing">
+              Muchos usuarios confundían el producto con una tarjeta de crédito tradicional y abandonaban antes de convertirse. Esto llevó a crear comunicación clara sobre la propuesta de valor.
+            </p>
+            
+            <!-- Proceso detallado -->
+            <div class="secondary-text">
+              <p><strong>UX</strong></p>
+              <p>• Optimización de la arquitectura de información.</p>
+              <p>• Creación de secciones explicativas con copywriting orientado a conversión.</p>
+              <p>• Inclusión de elementos de confianza tecnológica, FAQ, certificaciones.</p>
+              
+              <p><strong>UI</strong></p>
+              <p>• Rediseño completo del sitio con una jerarquía visual más clara.</p>
+              <p>• Mejora de la presentación de beneficios y funcionalidad del producto.</p>
+              
+              <p><strong>Front End</strong></p>
+              <p>• Implementación de nuevos flujos en HTML, CSS y JavaScript.</p>
+              <p>• Optimización de elementos en WordPress para mejor demostración.</p>
+            </div>
+          </div>
+          
+          <!-- Columna derecha: Mockups -->
+          <div class="marketing-mockups">
+            <div class="marketing-grid">
+              
+              <!-- Desktop -->
+              <div class="marketing-item">
+                <div class="marketing-image">
+                  <img 
+                    src="/images/projects/trove/marketing-desktop.jpg" 
+                    alt="Marketing Desktop"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              
+              <!-- Mobile -->
+              <div class="marketing-item">
+                <div class="marketing-image">
+                  <img 
+                    src="/images/projects/trove/marketing-mobile.jpg" 
+                    alt="Marketing Mobile"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CREACIÓN DEL PROYECTO SEO -->
+    <section class="content-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        
+        <!-- Título principal -->
+        <h2 class="section-title section-title-spacing">
+          Creación del Proyecto SEO
+        </h2>
+        
+        <!-- Descripción principal -->
+        <p class="description-main description-spacing">
+          El costo de adquisición de usuarios era muy alto debido al expensive advertising. Desarrollé una estrategia de SEO para reducir la dependencia de publicidad pagada y reducir el CAC.
+        </p>
+        
+        <!-- Resultados SEO -->
+        <div class="seo-results">
+          <div class="seo-stats">
+            
+            <!-- Stat 1 -->
+            <div class="seo-stat">
+              <div class="seo-number">35%</div>
+              <div class="seo-description">Usuarios orgánicos del total</div>
+            </div>
+            
+            <!-- Stat 2 -->
+            <div class="seo-stat">
+              <div class="seo-number">$18 → $8</div>
+              <div class="seo-description">Reducción CAC (56%)</div>
+            </div>
+            
+          </div>
+        </div>
+        
+        <!-- Proceso SEO -->
+        <div class="seo-process">
+          <div class="seo-grid">
+            
+            <!-- UX/UI -->
+            <div class="seo-item">
+              <h3 class="seo-title">UX/UI</h3>
+              <ul class="seo-list">
+                <li>Análisis de palabras clave y definición de contenido estratégico.</li>
+                <li>Optimización técnica del sitio para mejorar indexación y UX.</li>
+                <li>Creación de landing pages con alta conversión orgánica.</li>
+              </ul>
+            </div>
+            
+            <!-- Implementación -->
+            <div class="seo-item">
+              <h3 class="seo-title">Implementación</h3>
+              <ul class="seo-list">
+                <li>Desarrollo en WordPress, con Elementor, usando HTML, CSS y PHP.</li>
+                <li>Configuración de herramientas analíticas y SEO para monitoreo.</li>
+                <li>Optimización de componentes reutilizables para escalabilidad.</li>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+        
+        <!-- Mockups SEO -->
+        <div class="seo-mockups">
+          <div class="seo-mockups-grid">
+            
+            <!-- Landing page -->
+            <div class="seo-mockup">
+              <div class="seo-image">
+                <img 
+                  src="/images/projects/trove/seo-landing.jpg" 
+                  alt="SEO Landing Page"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            
+            <!-- Mobile SEO -->
+            <div class="seo-mockup">
+              <div class="seo-image">
+                <img 
+                  src="/images/projects/trove/seo-mobile.jpg" 
+                  alt="SEO Mobile"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN RESULTADOS FINALES -->
+    <section class="content-section results-final-section">
+      <div class="container mx-auto custom-padding" style="max-width: 1880px;">
+        
+        <!-- Título principal -->
+        <h2 class="section-title section-title-spacing">
+          RESULTADOS
+        </h2>
+        
+        <!-- Grid de resultados finales -->
+        <div class="final-results-grid">
+          
+          <!-- Conversión -->
+          <div class="final-result-item">
+            <div class="final-result-category">Conversión</div>
+            <div class="final-result-main">
+              <span class="final-result-number">20% → 60%</span>
+              <span class="final-result-improvement">+200%</span>
+            </div>
+            <div class="final-result-description">Mejora en conversión del onboarding</div>
+          </div>
+          
+          <!-- Tiempo -->
+          <div class="final-result-item">
+            <div class="final-result-category">Eficiencia</div>
+            <div class="final-result-main">
+              <span class="final-result-number">9min → 4min</span>
+              <span class="final-result-improvement">-55%</span>
+            </div>
+            <div class="final-result-description">Reducción tiempo de registro</div>
+          </div>
+          
+          <!-- Retención -->
+          <div class="final-result-item">
+            <div class="final-result-category">Retención</div>
+            <div class="final-result-main">
+              <span class="final-result-number">Cancelaciones</span>
+              <span class="final-result-improvement">-40%</span>
+            </div>
+            <div class="final-result-description">Reducción cancelaciones tempranas</div>
+          </div>
+          
+          <!-- CAC -->
+          <div class="final-result-item">
+            <div class="final-result-category">Adquisición</div>
+            <div class="final-result-main">
+              <span class="final-result-number">$18 → $8</span>
+              <span class="final-result-improvement">-56%</span>
+            </div>
+            <div class="final-result-description">Reducción costo de adquisición</div>
+          </div>
+          
+          <!-- Experiencia -->
+          <div class="final-result-item">
+            <div class="final-result-category">Experiencia</div>
+            <div class="final-result-main">
+              <span class="final-result-number">7.7/10</span>
+              <span class="final-result-improvement">Rating</span>
+            </div>
+            <div class="final-result-description">Calificación experiencia usuario</div>
+          </div>
+          
+          <!-- Orgánico -->
+          <div class="final-result-item">
+            <div class="final-result-category">SEO</div>
+            <div class="final-result-main">
+              <span class="final-result-number">35%</span>
+              <span class="final-result-improvement">Orgánico</span>
+            </div>
+            <div class="final-result-description">Usuarios adquiridos orgánicamente</div>
+          </div>
+          
         </div>
       </div>
     </section>
@@ -123,19 +724,41 @@ import Footer from '../../components/Footer.astro';
     }
   }
 
-  /* Typography */
+  /* Hero Section - 66vh exacto con max-height y padding superior como header */
+  .hero-section {
+    min-height: 66vh;
+    height: 66vh;
+    max-height: 880px;
+    display: flex;
+    align-items: center;
+    padding-top: 4.5rem; /* ~72px para igualar altura visual del header */
+  }
+
+  /* Video Section - sin padding/margin */
+  .video-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Typography with fluid scaling */
   .title-main {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 72px;
-    font-weight: 900;
+    font-size: clamp(7.5rem, 12vw, 10.5rem); /* 120px → 168px */
+    font-weight: 700;
     color: #000000;
     letter-spacing: -0.02em;
     line-height: 1;
   }
+  
+  :root.dark .title-main {
+    color: #ffffff;
+  }
 
   .role-badges {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 16px;
+    font-size: clamp(0.875rem, 2vw, 1rem); /* 14px → 16px */
     font-weight: 400;
     color: #666666;
     display: flex;
@@ -144,48 +767,130 @@ import Footer from '../../components/Footer.astro';
     gap: 8px;
     flex-wrap: wrap;
   }
+  
+  :root.dark .role-badges {
+    color: #999999;
+  }
 
   .separator {
     color: #666666;
     margin: 0 4px;
   }
+  
+  :root.dark .separator {
+    color: #999999;
+  }
+
+  /* ========================================
+     SISTEMA DE ESPACIADOS MODULARES UX/UI
+     ======================================== */
+  
+  /* Variables del sistema de espaciados */
+  :root {
+    /* Espaciados base con progresión modular */
+    --space-xs: clamp(0.75rem, 2vw, 1rem);     /* 12px → 16px */
+    --space-sm: clamp(1rem, 3vw, 1.5rem);      /* 16px → 24px */
+    --space-md: clamp(1.5rem, 4vw, 2.5rem);    /* 24px → 40px */
+    --space-lg: clamp(2.5rem, 6vw, 4rem);      /* 40px → 64px */
+    --space-xl: clamp(3.5rem, 8vw, 6rem);      /* 56px → 96px */
+    --space-2xl: clamp(5rem, 12vw, 8rem);      /* 80px → 128px */
+    --space-3xl: clamp(7rem, 16vw, 12rem);     /* 112px → 192px */
+    --space-4xl: clamp(9rem, 20vw, 16rem);     /* 144px → 256px */
+  }
+
+  /* ========================================
+     SECCIONES PRINCIPALES
+     ======================================== */
+
+  /* Hero Section - Máximo protagonismo */
+  .hero-section {
+    padding-top: var(--space-4xl);    /* 144px → 256px */
+    padding-bottom: var(--space-3xl); /* 112px → 192px */
+  }
+
+  /* Video Section - Protagonismo visual central */
+  .video-section {
+    padding-top: var(--space-2xl);    /* 80px → 128px */
+    padding-bottom: var(--space-2xl); /* 80px → 128px */
+  }
+
+  /* Content Section - Transición suave */
+  .content-section {
+    padding-top: var(--space-2xl);    /* --space-2xl */
+    padding-bottom: var(--space-2xl); /* --space-2xl */
+  }
+
+  /* ========================================
+     ESPACIADOS DE ELEMENTOS
+     ======================================== */
+
+  /* Título principal */
+  .title-spacing {
+    margin-bottom: 0 !important;
+  }
+
+  /* Títulos de sección */
+  .section-title-spacing {
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Descripción principal */
+  .description-spacing {
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Stats grid */
+  .stats-spacing {
+    margin-top: var(--space-xl); /* 56px → 96px */
+  }
 
   .section-title {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 64px;
-    font-weight: 900;
+    font-size: clamp(2.5rem, 8vw, 5rem); /* 40px → 80px */
+    font-weight: 700;
     color: #000000;
     letter-spacing: -0.02em;
     line-height: 1;
-    margin-top: 80px;
+  }
+  
+  :root.dark .section-title {
+    color: #ffffff;
   }
 
   .description-main {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 24px;
+    font-size: clamp(1.125rem, 3vw, 1.5rem); /* 18px → 24px */
     font-weight: 400;
     color: #000000;
     line-height: 1.4;
     max-width: 600px;
   }
+  
+  :root.dark .description-main {
+    color: #ffffff;
+  }
 
   .secondary-text {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 16px;
+    font-size: clamp(0.875rem, 2.5vw, 1rem); /* 14px → 16px */
     font-weight: 400;
     color: #333333;
     line-height: 1.6;
   }
+  
+  :root.dark .secondary-text {
+    color: #cccccc;
+  }
 
   .secondary-text p {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-sm); /* 16px → 24px - Ritmo de lectura optimizado */
   }
 
   /* Video Container */
   .video-container {
     background-color: #000000;
-    border-radius: 40px;
-    height: 600px;
+    border-radius: clamp(1.25rem, 4vw, 2.5rem); /* 20px → 40px */
+    aspect-ratio: 16 / 9;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -195,13 +900,28 @@ import Footer from '../../components/Footer.astro';
     width: 100%;
     height: 100%;
     border: none;
+    pointer-events: none; /* Evita hover UI de YouTube */
   }
 
   /* Content Grid */
-  .content-grid {
+  /* Side by Side Layout */
+  .side-by-side-layout {
     display: grid;
-    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
     align-items: start;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .text-content {
+    max-width: 100%;
+  }
+
+  .stats-container {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .main-description {
@@ -209,24 +929,52 @@ import Footer from '../../components/Footer.astro';
   }
 
   /* Stats Grid */
-  .stats-grid {
+  /* Stats Grid 2x2 */
+  .stats-grid-2x2 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
-    margin-top: 60px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .stat-item {
     text-align: left;
   }
 
+  /* Stat Cards */
+  .stat-card {
+    background-color: #f8f9fa; /* Gris claro para light mode */
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: 40px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Dark mode para stat cards */
+  :root.dark .stat-card {
+    background-color: #2a2a2a; /* Negro no muy oscuro para dark mode */
+  }
+
   .stat-number {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 72px;
-    font-weight: 900;
+    font-size: clamp(2rem, 7vw, 4rem); /* 32px → 64px */
+    font-weight: 600;
     color: #000000;
     line-height: 1;
     margin-bottom: 8px;
+  }
+  
+  :root.dark .stat-number {
+    color: #ffffff;
   }
 
   .stat-number-double {
@@ -238,41 +986,683 @@ import Footer from '../../components/Footer.astro';
 
   .main-stat {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 72px;
-    font-weight: 900;
+    font-size: clamp(2rem, 7vw, 4rem); /* 32px → 64px */
+    font-weight: 600;
     color: #000000;
     line-height: 1;
+  }
+  
+  :root.dark .main-stat {
+    color: #ffffff;
   }
 
   .secondary-stat {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 72px;
-    font-weight: 900;
+    font-size: clamp(2rem, 7vw, 4rem); /* 32px → 64px */
+    font-weight: 600;
     color: #000000;
     line-height: 1;
+  }
+  
+  :root.dark .secondary-stat {
+    color: #ffffff;
   }
 
   .stat-description {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: 14px;
+    font-size: clamp(0.75rem, 2vw, 0.875rem); /* 12px → 14px */
     font-weight: 400;
     color: #666666;
     line-height: 1.3;
   }
+  
+  :root.dark .stat-description {
+    color: #999999;
+  }
 
   .stat-description span {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: var(--space-xs); /* 12px → 16px - Micro-espaciado consistente */
   }
 
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .title-main {
-      font-size: 48px;
-    }
+  /* ========================================
+     JUSTIFICACIÓN UX/UI DEL SISTEMA
+     ======================================== */
+  /*
+  PROGRESIÓN VISUAL OPTIMIZADA:
+  
+  1. HERO (144-256px top + 112-192px bottom):
+     - Máximo protagonismo para el título principal
+     - Espacio generoso para respiración visual
+     - Establece jerarquía dominante
+  
+  2. VIDEO (80-128px top/bottom):
+     - Protagonismo central sin competir con hero
+     - Transición suave desde título
+     - Suficiente aire para ser elemento focal
+  
+  3. CONTENT (56-96px top + 112-192px bottom):
+     - Conexión visual fluida con video
+     - Espacio inferior amplio para conclusión
+     - Balance perfecto texto/whitespace
+  
+  MICRO-ESPACIADOS:
+  - Títulos: 40-64px y 56-96px (jerarquía clara)
+  - Descripciones: 40-64px (separación lecturable)
+  - Stats: 56-96px (contexto visual mantenido)
+  - Párrafos: 16-24px (ritmo de lectura óptimo)
+  
+  PRINCIPIOS APLICADOS:
+  ✓ Progresión matemática 1.4x-1.6x
+  ✓ Jerarquía visual clara
+  ✓ Ritmo de scroll natural
+  ✓ Responsive coherente
+  ✓ Punto focal optimizado (video)
+  */
 
+  /* ========================================
+     NUEVAS SECCIONES - ESTILOS
+     ======================================== */
+  
+  /* Project Image Large */
+  .project-image-large {
+    background-color: #f8f9fa;
+    border-radius: clamp(1.25rem, 4vw, 2.5rem);
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  :root.dark .project-image-large {
+    background-color: #2a2a2a;
+  }
+  
+  /* Quote Section */
+  .quote-section {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  :root.dark .quote-section {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  .quote-container {
+    text-align: center;
+    padding: var(--space-3xl) 0;
+  }
+  
+  .quote-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  :root.dark .quote-title {
+    color: #ffffff;
+  }
+  
+  /* Pillars Grid */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  
+  .pillar-item {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: clamp(1.25rem, 3vw, 2rem);
+    padding: var(--space-lg);
+    transition: all 0.3s ease;
+  }
+  
+  .pillar-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  :root.dark .pillar-item {
+    background-color: #1a1a1a;
+    border-color: #333333;
+  }
+  
+  :root.dark .pillar-item:hover {
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+  }
+  
+  .pillar-number {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    color: #666666;
+    margin-bottom: var(--space-sm);
+  }
+  
+  :root.dark .pillar-number {
+    color: #999999;
+  }
+  
+  .pillar-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
+  }
+  
+  :root.dark .pillar-title {
+    color: #ffffff;
+  }
+  
+  .pillar-description {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-weight: 400;
+    color: #333333;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+  
+  :root.dark .pillar-description {
+    color: #cccccc;
+  }
+  
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+  
+  .tag {
+    display: inline-block;
+    background-color: #f3f4f6;
+    color: #374151;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-weight: 500;
+    padding: clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 2vw, 0.75rem);
+    border-radius: clamp(0.375rem, 1vw, 0.5rem);
+    transition: all 0.2s ease;
+  }
+  
+  .tag:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-1px);
+  }
+  
+  :root.dark .tag {
+    background-color: #374151;
+    color: #d1d5db;
+  }
+  
+  :root.dark .tag:hover {
+    background-color: #4b5563;
+  }
+  
+  /* Strong text styling */
+  .secondary-text strong {
+    font-weight: 600;
+    color: #000000;
+  }
+  
+  :root.dark .secondary-text strong {
+    color: #ffffff;
+  }
+
+  /* Results Components */
+  .results-container {
+    width: 100%;
+  }
+  
+  .results-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  
+  .result-item {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-sm);
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: var(--space-md);
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+  }
+  
+  :root.dark .result-item {
+    background-color: #2a2a2a;
+  }
+  
+  .result-before, .result-after {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .result-label {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-weight: 500;
+    color: #666666;
+    margin-bottom: 4px;
+  }
+  
+  :root.dark .result-label {
+    color: #999999;
+  }
+  
+  .result-number {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 4px;
+  }
+  
+  :root.dark .result-number {
+    color: #ffffff;
+  }
+  
+  .result-description {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    color: #666666;
+  }
+  
+  :root.dark .result-description {
+    color: #999999;
+  }
+  
+  .result-arrow {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: #000000;
+  }
+  
+  :root.dark .result-arrow {
+    color: #ffffff;
+  }
+  
+  /* Mockups Sections */
+  .mockups-section {
+    margin-top: var(--space-2xl);
+  }
+  
+  .mockups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+  
+  .mockup-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .mockup-image {
+    background-color: #f8f9fa;
+    border-radius: clamp(1.25rem, 3vw, 2rem);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  
+  :root.dark .mockup-image {
+    background-color: #2a2a2a;
+  }
+  
+  .mockup-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .mockup-label {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-weight: 600;
+    color: #000000;
+  }
+  
+  :root.dark .mockup-label {
+    color: #ffffff;
+  }
+  
+  .mockup-description {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    color: #666666;
+  }
+  
+  :root.dark .mockup-description {
+    color: #999999;
+  }
+  
+  /* Process Sections */
+  .process-section {
+    margin-top: var(--space-xl);
+  }
+  
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+  
+  .process-item {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    padding: var(--space-md);
+  }
+  
+  :root.dark .process-item {
+    background-color: #1a1a1a;
+    border-color: #333333;
+  }
+  
+  .process-title {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: var(--space-sm);
+  }
+  
+  :root.dark .process-title {
+    color: #ffffff;
+  }
+  
+  .process-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .process-list li {
+    font-size: clamp(0.875rem, 1.8vw, 1rem);
+    color: #333333;
+    line-height: 1.6;
+    margin-bottom: var(--space-xs);
+    position: relative;
+    padding-left: 1rem;
+  }
+  
+  .process-list li:before {
+    content: "•";
+    color: #666666;
+    position: absolute;
+    left: 0;
+  }
+  
+  :root.dark .process-list li {
+    color: #cccccc;
+  }
+  
+  :root.dark .process-list li:before {
+    color: #999999;
+  }
+  
+  /* Webapp Mockups */
+  .webapp-mockups {
+    margin-top: var(--space-xl);
+  }
+  
+  .webapp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+  }
+  
+  .webapp-item {
+    background-color: #f8f9fa;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    overflow: hidden;
+  }
+  
+  :root.dark .webapp-item {
+    background-color: #2a2a2a;
+  }
+  
+  .webapp-image {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  
+  /* Marketing Mockups */
+  .marketing-mockups {
+    width: 100%;
+  }
+  
+  .marketing-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .marketing-item {
+    background-color: #f8f9fa;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    overflow: hidden;
+  }
+  
+  :root.dark .marketing-item {
+    background-color: #2a2a2a;
+  }
+  
+  .marketing-image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  
+  /* SEO Components */
+  .seo-results {
+    margin: var(--space-xl) 0;
+  }
+  
+  .seo-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+  }
+  
+  .seo-stat {
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: var(--space-lg);
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+  }
+  
+  :root.dark .seo-stat {
+    background-color: #2a2a2a;
+  }
+  
+  .seo-number {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #000000;
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+  
+  :root.dark .seo-number {
+    color: #ffffff;
+  }
+  
+  .seo-description {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: #666666;
+  }
+  
+  :root.dark .seo-description {
+    color: #999999;
+  }
+  
+  .seo-process {
+    margin: var(--space-xl) 0;
+  }
+  
+  .seo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+  
+  .seo-item {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    padding: var(--space-md);
+  }
+  
+  :root.dark .seo-item {
+    background-color: #1a1a1a;
+    border-color: #333333;
+  }
+  
+  .seo-title {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: var(--space-sm);
+  }
+  
+  :root.dark .seo-title {
+    color: #ffffff;
+  }
+  
+  .seo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .seo-list li {
+    font-size: clamp(0.875rem, 1.8vw, 1rem);
+    color: #333333;
+    line-height: 1.6;
+    margin-bottom: var(--space-xs);
+    position: relative;
+    padding-left: 1rem;
+  }
+  
+  .seo-list li:before {
+    content: "•";
+    color: #666666;
+    position: absolute;
+    left: 0;
+  }
+  
+  :root.dark .seo-list li {
+    color: #cccccc;
+  }
+  
+  :root.dark .seo-list li:before {
+    color: #999999;
+  }
+  
+  /* SEO Mockups */
+  .seo-mockups {
+    margin-top: var(--space-xl);
+  }
+  
+  .seo-mockups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+  
+  .seo-mockup {
+    background-color: #f8f9fa;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    overflow: hidden;
+  }
+  
+  :root.dark .seo-mockup {
+    background-color: #2a2a2a;
+  }
+  
+  .seo-image {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  
+  /* Final Results Section */
+  .results-final-section {
+    background-color: #000000;
+    color: #ffffff;
+  }
+  
+  :root.dark .results-final-section {
+    background-color: #000000;
+  }
+  
+  .results-final-section .section-title {
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .final-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  
+  .final-result-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .final-result-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+  }
+  
+  .final-result-category {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-weight: 500;
+    color: #999999;
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .final-result-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .final-result-number {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: #ffffff;
+  }
+  
+  .final-result-improvement {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 600;
+    color: #10b981;
+  }
+  
+  .final-result-description {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    color: #cccccc;
+    line-height: 1.4;
+  }
+
+  /* Responsive Design - Mobile specific adjustments */
+  @media (max-width: 768px) {
     .role-badges {
-      font-size: 14px;
       flex-direction: column;
       gap: 4px;
     }
@@ -281,63 +1671,18 @@ import Footer from '../../components/Footer.astro';
       display: none;
     }
 
-    .section-title {
-      font-size: 40px;
-      margin-top: 40px;
-    }
-
-    .description-main {
-      font-size: 20px;
-    }
-
-    .secondary-text {
-      font-size: 14px;
-    }
-
-    .video-container {
-      height: 400px;
-      border-radius: 24px;
-    }
-
-    .stats-grid {
+    .side-by-side-layout {
       grid-template-columns: 1fr;
-      gap: 40px;
-      margin-top: 40px;
+      gap: clamp(2rem, 6vw, 3rem);
     }
 
-    .stat-number,
-    .main-stat,
-    .secondary-stat {
-      font-size: 48px;
+    .stats-container {
+      justify-content: center;
     }
 
-    .stat-description {
-      font-size: 12px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .title-main {
-      font-size: 36px;
-    }
-
-    .section-title {
-      font-size: 32px;
-    }
-
-    .description-main {
-      font-size: 18px;
-    }
-
-    .video-container {
-      height: 300px;
-      border-radius: 20px;
-    }
-
-    .stat-number,
-    .main-stat,
-    .secondary-stat {
-      font-size: 36px;
+    .stats-grid-2x2 {
+      grid-template-columns: 1fr;
+      max-width: 100%;
     }
   }
 </style>

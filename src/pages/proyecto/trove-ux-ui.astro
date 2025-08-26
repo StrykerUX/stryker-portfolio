@@ -318,8 +318,8 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
                 <div class="result-arrow">→</div>
                 <div class="result-after">
                   <span class="result-label">Después</span>
-                  <span class="result-number">60%</span>
-                  <span class="result-description">200% mejora conversión</span>
+                  <span class="result-number">38%</span>
+                  <span class="result-description">90% mejora conversión</span>
                 </div>
               </div>
               
@@ -428,8 +428,8 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
                 <div class="result-arrow">→</div>
                 <div class="result-after">
                   <span class="result-label">Después</span>
-                  <span class="result-number">4.6/5</span>
-                  <span class="result-description">44% mejora satisfacción</span>
+                  <span class="result-number">4.1/5</span>
+                  <span class="result-description">28% mejora satisfacción</span>
                 </div>
               </div>
               
@@ -479,67 +479,106 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
         
         <!-- Título principal -->
         <h2 class="section-title section-title-spacing">
-          Rediseño del Sitio de Marketing
+          Rediseño del Sitio<br>de Marketing
         </h2>
         
-        <!-- Layout side by side: texto izquierda, mockups derecha -->
+        <!-- Layout side by side: texto izquierda, resultados derecha -->
         <div class="side-by-side-layout">
           
-          <!-- Columna izquierda: Descripción -->
+          <!-- Columna izquierda: Descripción del proceso -->
           <div class="text-content">
             <p class="description-main description-spacing">
-              Muchos usuarios confundían el producto con una tarjeta de crédito tradicional y abandonaban antes de convertirse. Esto llevó a crear comunicación clara sobre la propuesta de valor.
+              Muchos usuarios confundían el producto con una tarjeta de crédito tradicional y abandonaban antes de convertirse. Rediseñé el sitio para comunicar claramente la propuesta de valor.
             </p>
             
             <!-- Proceso detallado -->
             <div class="secondary-text process-list">
               <p><strong>UX</strong></p>
-              <p>• Optimización de la arquitectura de información.</p>
+              <p>• Simplificación de la arquitectura de información con card sorting y testing.</p>
               <p>• Creación de secciones explicativas con copywriting orientado a conversión.</p>
-              <p>• Inclusión de elementos de confianza tecnológica, FAQ, certificaciones.</p>
+              <p>• Inclusión de elementos visuales que refuerzan la confianza (testimonios, FAQs).</p>
               
               <p><strong>UI</strong></p>
-              <p>• Rediseño completo del sitio con una jerarquía visual más clara.</p>
-              <p>• Mejora de la presentación de beneficios y funcionalidad del producto.</p>
+              <p>• Rediseño completo con sistema de diseño consistente y jerarquía visual optimizada.</p>
+              <p>• Integración de elementos interactivos para demostrar funcionalidad del producto.</p>
               
               <p><strong>Front End</strong></p>
-              <p>• Implementación de nuevos flujos en HTML, CSS y JavaScript.</p>
-              <p>• Optimización de elementos en WordPress para mejor demostración.</p>
+              <p>• Implementación en WordPress con Elementor, HTML, CSS y PHP personalizado.</p>
+              <p>• Desarrollo de landings específicas con tracking de conversión para campañas.</p>
             </div>
           </div>
           
-          <!-- Columna derecha: Mockups -->
-          <div class="marketing-mockups">
-            <div class="marketing-grid">
+          <!-- Columna derecha: Resultados -->
+          <div class="results-container">
+            <div class="results-grid">
               
-              <!-- Desktop -->
-              <div class="marketing-item">
-                <div class="marketing-image">
-                  <OptimizedImage 
-                    src="/images/projects/trove/marketing-desktop.jpg" 
-                    alt="Marketing Desktop"
-                    class=""
-                    loading="lazy"
-                retries={3}
-                  />
+              <!-- Resultado 1 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">12%</span>
+                  <span class="result-description">Tasa de conversión del sitio web</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">28%</span>
+                  <span class="result-description">133% mejora conversión</span>
                 </div>
               </div>
-              
-              <!-- Mobile -->
-              <div class="marketing-item">
-                <div class="marketing-image">
-                  <OptimizedImage 
-                    src="/images/projects/trove/marketing-mobile.jpg" 
-                    alt="Marketing Mobile"
-                    class=""
-                    loading="lazy"
-                retries={3}
-                  />
+
+              <!-- Resultado 2 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">2.1min</span>
+                  <span class="result-description">Tiempo promedio en el sitio</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">4.3min</span>
+                  <span class="result-description">105% mayor engagement</span>
                 </div>
               </div>
               
             </div>
           </div>
+          
+        </div>
+        
+        <!-- Mockups del sitio de marketing -->
+        <div class="mockups-section">
+          <div class="mockups-grid">
+              
+            <!-- Desktop -->
+            <div class="mockup-item">
+              <div class="mockup-image">
+                <OptimizedImage 
+                  src="/images/projects/trove/marketing-desktop.jpg" 
+                  alt="Marketing Desktop"
+                  class=""
+                  loading="lazy"
+                  retries={3}
+                />
+              </div>
+            </div>
+            
+            <!-- Mobile -->
+            <div class="mockup-item">
+              <div class="mockup-image">
+                <OptimizedImage 
+                  src="/images/projects/trove/marketing-mobile.jpg" 
+                  alt="Marketing Mobile"
+                  class=""
+                  loading="lazy"
+                  retries={3}
+                />
+              </div>
+            </div>
+              
+          </div>
+        </div>
           
         </div>
       </div>
@@ -551,58 +590,72 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
         
         <!-- Título principal -->
         <h2 class="section-title section-title-spacing">
-          Creación del Proyecto SEO
+          Creación del<br>Proyecto SEO
         </h2>
         
-        <!-- Descripción principal -->
-        <p class="description-main description-spacing">
-          El costo de adquisición de usuarios era muy alto debido al expensive advertising. Desarrollé una estrategia de SEO para reducir la dependencia de publicidad pagada y reducir el CAC.
-        </p>
-        
-        <!-- Resultados SEO -->
-        <div class="seo-results">
-          <div class="seo-stats">
+        <!-- Layout side by side: texto izquierda, resultados derecha -->
+        <div class="side-by-side-layout">
+          
+          <!-- Columna izquierda: Descripción del proceso -->
+          <div class="text-content">
+            <p class="description-main description-spacing">
+              El costo de adquisición de usuarios solo se volvía rentable después del segundo mes, haciendo insostenible la captación mediante Ads. Desarrollé una estrategia SEO para adquirir clientes orgánicamente.
+            </p>
             
-            <!-- Stat 1 -->
-            <div class="seo-stat">
-              <div class="seo-number">35%</div>
-              <div class="seo-description">Usuarios orgánicos del total</div>
+            <!-- Proceso detallado -->
+            <div class="secondary-text process-list">
+              <p><strong>SEO</strong></p>
+              <p>• Análisis técnico de palabras clave con herramientas como SEMrush y definición estratégica.</p>
+              <p>• Optimización técnica del sitio (Core Web Vitals, schema markup) para Google.</p>
+              <p>• Implementación de blog con artículos orientados a atraer tráfico relevante.</p>
+              
+              <p><strong>UX/UI</strong></p>
+              <p>• Creación de estructuras de contenido optimizadas para SEO y conversión.</p>
+              <p>• Diseño de landing pages con foco en conversión orgánica y métricas de rendimiento.</p>
+              
+              <p><strong>Implementación</strong></p>
+              <p>• Implementación en WordPress con ACF y sistema de templates personalizados.</p>
+              <p>• Sistema automatizado para importar datos usando Google Sheets API y Elementor.</p>
             </div>
-            
-            <!-- Stat 2 -->
-            <div class="seo-stat">
-              <div class="seo-number">$18 → $8</div>
-              <div class="seo-description">Reducción CAC (56%)</div>
-            </div>
-            
           </div>
-        </div>
-        
-        <!-- Proceso SEO -->
-        <div class="seo-process">
-          <div class="seo-grid">
-            
-            <!-- UX/UI -->
-            <div class="seo-item">
-              <h3 class="seo-title">UX/UI</h3>
-              <ul class="seo-list">
-                <li>Análisis de palabras clave y definición de contenido estratégico.</li>
-                <li>Optimización técnica del sitio para mejorar indexación y UX.</li>
-                <li>Creación de landing pages con alta conversión orgánica.</li>
-              </ul>
+          
+          <!-- Columna derecha: Resultados -->
+          <div class="results-container">
+            <div class="results-grid">
+              
+              <!-- Resultado 1 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">$18</span>
+                  <span class="result-description">Costo de adquisición por cliente</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">$8</span>
+                  <span class="result-description">56% reducción CAC</span>
+                </div>
+              </div>
+
+              <!-- Resultado 2 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">5%</span>
+                  <span class="result-description">Tráfico orgánico del total</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">20%</span>
+                  <span class="result-description">300% crecimiento orgánico</span>
+                </div>
+              </div>
+              
             </div>
-            
-            <!-- Implementación -->
-            <div class="seo-item">
-              <h3 class="seo-title">Implementación</h3>
-              <ul class="seo-list">
-                <li>Desarrollo en WordPress, con Elementor, usando HTML, CSS y PHP.</li>
-                <li>Configuración de herramientas analíticas y SEO para monitoreo.</li>
-                <li>Optimización de componentes reutilizables para escalabilidad.</li>
-              </ul>
-            </div>
-            
           </div>
+          
         </div>
         
         <!-- Mockups SEO -->
@@ -641,23 +694,25 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
     </section>
 
     <!-- SECCIÓN RESULTADOS FINALES -->
-    <section class="content-section results-final-section">
+    <section class="content-section">
       <div class="container mx-auto custom-padding" style="max-width: 1880px;">
         
-        <!-- Título principal -->
-        <h2 class="section-title section-title-spacing">
-          RESULTADOS
-        </h2>
-        
-        <!-- Grid de resultados finales -->
-        <div class="final-results-grid">
+        <!-- Container de resultados -->
+        <div class="results-final-container">
+          <!-- Título principal -->
+          <h2 class="section-title section-title-spacing results-final-title">
+            RESULTADOS
+          </h2>
+          
+          <!-- Grid de resultados finales -->
+          <div class="final-results-grid">
           
           <!-- Conversión -->
           <div class="final-result-item">
             <div class="final-result-category">Conversión</div>
             <div class="final-result-main">
-              <span class="final-result-number">20% → 60%</span>
-              <span class="final-result-improvement">+200%</span>
+              <span class="final-result-number">20% → 38%</span>
+              <span class="final-result-improvement">+90%</span>
             </div>
             <div class="final-result-description">Mejora en conversión del onboarding</div>
           </div>
@@ -672,14 +727,14 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
             <div class="final-result-description">Reducción tiempo de registro</div>
           </div>
           
-          <!-- Retención -->
+          <!-- Retención Webapp -->
           <div class="final-result-item">
             <div class="final-result-category">Retención</div>
             <div class="final-result-main">
-              <span class="final-result-number">Cancelaciones</span>
-              <span class="final-result-improvement">-40%</span>
+              <span class="final-result-number">35% → 68%</span>
+              <span class="final-result-improvement">+94%</span>
             </div>
-            <div class="final-result-description">Reducción cancelaciones tempranas</div>
+            <div class="final-result-description">Retención después del primer mes</div>
           </div>
           
           <!-- CAC -->
@@ -692,26 +747,48 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
             <div class="final-result-description">Reducción costo de adquisición</div>
           </div>
           
-          <!-- Experiencia -->
+          <!-- Satisfacción -->
           <div class="final-result-item">
-            <div class="final-result-category">Experiencia</div>
+            <div class="final-result-category">Satisfacción</div>
             <div class="final-result-main">
-              <span class="final-result-number">7.7/10</span>
-              <span class="final-result-improvement">Rating</span>
+              <span class="final-result-number">3.2 → 4.1</span>
+              <span class="final-result-improvement">+28%</span>
             </div>
-            <div class="final-result-description">Calificación experiencia usuario</div>
+            <div class="final-result-description">Satisfacción con la interfaz</div>
           </div>
           
-          <!-- Orgánico -->
+          <!-- SEO Tráfico -->
           <div class="final-result-item">
             <div class="final-result-category">SEO</div>
             <div class="final-result-main">
-              <span class="final-result-number">35%</span>
-              <span class="final-result-improvement">Orgánico</span>
+              <span class="final-result-number">5% → 20%</span>
+              <span class="final-result-improvement">+300%</span>
             </div>
-            <div class="final-result-description">Usuarios adquiridos orgánicamente</div>
+            <div class="final-result-description">Crecimiento tráfico orgánico</div>
           </div>
           
+          <!-- Conversión Marketing -->
+          <div class="final-result-item">
+            <div class="final-result-category">Marketing</div>
+            <div class="final-result-main">
+              <span class="final-result-number">12% → 28%</span>
+              <span class="final-result-improvement">+133%</span>
+            </div>
+            <div class="final-result-description">Conversión del sitio web</div>
+          </div>
+          
+          <!-- Engagement -->
+          <div class="final-result-item">
+            <div class="final-result-category">Engagement</div>
+            <div class="final-result-main">
+              <span class="final-result-number">2.1 → 4.3min</span>
+              <span class="final-result-improvement">+105%</span>
+            </div>
+            <div class="final-result-description">Tiempo promedio en el sitio</div>
+          </div>
+          
+        </div>
+        
         </div>
       </div>
     </section>
@@ -1641,39 +1718,72 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
   }
   
   /* Final Results Section */
-  .results-final-section {
-    background-color: #000000;
-    color: #ffffff;
+  .results-final-container {
+    background-color: #f7f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 60px;
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
   }
   
-  :root.dark .results-final-section {
+  :root.dark .results-final-container {
     background-color: #000000;
+    border-color: #333333;
   }
   
-  .results-final-section .section-title {
-    color: #ffffff;
+  .results-final-title {
+    color: #000000;
     text-align: center;
+    margin-bottom: 0;
+  }
+  
+  :root.dark .results-final-title {
+    color: #ffffff;
   }
   
   .final-results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-lg);
-    margin-top: var(--space-xl);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+  
+  @media (max-width: 1024px) {
+    .final-results-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .final-results-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(8, 1fr);
+    }
   }
   
   .final-result-item {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: clamp(1rem, 2vw, 1.5rem);
-    padding: var(--space-lg);
+    padding: var(--space-md);
     text-align: center;
     transition: all 0.3s ease;
   }
   
   .final-result-item:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: #f9fafb;
     transform: translateY(-4px);
+  }
+  
+  :root.dark .final-result-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  :root.dark .final-result-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
   }
   
   .final-result-category {
@@ -1695,6 +1805,10 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
   .final-result-number {
     font-size: clamp(1.25rem, 3vw, 1.75rem);
     font-weight: 700;
+    color: #000000;
+  }
+  
+  :root.dark .final-result-number {
     color: #ffffff;
   }
   
@@ -1706,8 +1820,12 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
   
   .final-result-description {
     font-size: clamp(0.75rem, 1.5vw, 0.875rem);
-    color: #cccccc;
+    color: #666666;
     line-height: 1.4;
+  }
+  
+  :root.dark .final-result-description {
+    color: #cccccc;
   }
 
   /* Process list spacing */

@@ -26,9 +26,9 @@ const text = content[lang];
 ---
 
 <!-- CTA final en tarjeta de fondo claro -->
-<section class="py-20 bg-gray-50 transition-colors duration-300" style="background-color: var(--gray-100);">
+<section class="py-20 bg-white dark:bg-[#121212] transition-colors duration-300">
   <div class="container mx-auto custom-padding" style="max-width: 1880px;">
-    <div class="bg-white rounded-3xl p-12 text-center border dark:border-gray-700" style="background-color: var(--brand-white);">
+    <div class="bg-[#f7f9fa] dark:bg-black text-black dark:text-white p-12 text-center border-none" style="border-radius: 40px;">
 <style>
   /* Custom padding responsive */
   .custom-padding {
@@ -44,19 +44,19 @@ const text = content[lang];
   }
 </style>
       <!-- Mensaje principal con jerarquía de subtítulo -->
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+      <h2 class="text-3xl font-bold text-black dark:text-white mb-2">
         {text.cta.title}
       </h2>
-      <p class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+      <p class="text-2xl font-bold text-black dark:text-white mb-8">
         {text.cta.subtitle}
       </p>
       
       <!-- Correo en línea con ícono sutil -->
       <div class="flex items-center justify-center space-x-3">
-        <svg class="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
-        <a href={`mailto:${text.cta.email}`} class="text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <a href={`mailto:${text.cta.email}`} class="text-lg text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-200">
           {text.cta.email}
         </a>
       </div>

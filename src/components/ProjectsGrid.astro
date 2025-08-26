@@ -1,5 +1,6 @@
 ---
 import { projects } from '../data/projects.ts';
+import OptimizedImage from './OptimizedImage.astro';
 
 export interface Props {
   lang?: 'es' | 'en';
@@ -31,11 +32,13 @@ const { lang = 'es' } = Astro.props;
           <!-- Miniatura grande con esquinas 20px, hover video para proyectos especiales -->
           <div class="project-image relative aspect-[5/4] overflow-hidden bg-gray-100" style="background-color: var(--gray-100); border-radius: 40px;">
             {project.image && project.image !== '/images/projects/' + project.slug + '.jpg' ? (
-              <img 
+              <OptimizedImage 
                 src={project.image} 
                 alt={project.title}
-                class="w-full h-full object-cover transition-opacity duration-300"
+                class=""
                 loading="lazy"
+                retries={3}
+                preload={project.featured}
               />
             ) : (
               <div class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center" style="background: linear-gradient(135deg, var(--gray-100), var(--gray-300));">
@@ -48,7 +51,7 @@ const { lang = 'es' } = Astro.props;
             <!-- Video hover overlay -->
             {project.hoverVideo && (
               <div 
-                class="video-hover-overlay absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none"
+                class="video-hover-overlay absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none z-10"
                 data-video-url={project.hoverVideo}
               >
                 <div class="w-full h-full bg-black flex items-center justify-center" style="border-radius: 40px;">
@@ -61,7 +64,7 @@ const { lang = 'es' } = Astro.props;
           <!-- Link invisible para toda la tarjeta -->
           <a 
             href={`/${lang === 'en' ? 'en/project' : 'proyecto'}/${project.slug}`}
-            class="absolute inset-0 z-10"
+            class="absolute inset-0 z-20"
             aria-label={`Ver proyecto ${project.title}`}
           >
             <span class="sr-only">Ver proyecto {project.title}</span>

@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
 ---
 
 <Layout 
@@ -132,7 +133,6 @@ import Footer from '../../components/Footer.astro';
             <div class="secondary-text">
               <p>El mayor desafío era reconstruir la experiencia del usuario desde la base, eliminando las fricciones que afectaban tanto la conversión como la retención del producto.</p>
               
-              <p><strong>Objetivos claros y los componentes:</strong> Los datos y tasa de registro, eliminando las fricciones que afectaban sin reforzar la percepción de protección.</p>
               
               <p><strong>Confusión sobre el producto:</strong> Muchos usuarios lo veían como una tarjeta de crédito, cuando realmente era un sistema de crédito interno basado en suscripción.</p>
               
@@ -143,11 +143,13 @@ import Footer from '../../components/Footer.astro';
           <!-- Columna derecha: Imagen del producto -->
           <div class="image-container">
             <div class="project-image-large">
-              <img 
+              <OptimizedImage 
                 src="/images/projects/trove/trove-product-overview.jpg" 
                 alt="Trove Product Overview"
-                class="w-full h-full object-cover"
-                loading="lazy"
+                class=""
+                loading="eager"
+                retries={3}
+                preload={true}
               />
             </div>
           </div>
@@ -161,17 +163,14 @@ import Footer from '../../components/Footer.astro';
       <div class="container mx-auto custom-padding" style="max-width: 1880px;">
         <div class="quote-container">
           <h2 class="quote-title">
-            ERA MOMENTO DE RECONSTRUIR<br>
-            LA EXPERIENCIA Y CONVERTIR<br>
-            A TROVE EN UN PRODUCTO<br>
-            SÓLIDO Y ESCALABLE
+            El plan de acción se basó en cuatro pilares: mejorar el onboarding para aumentar conversión, rediseñar el sitio de marketing para educar al usuario, optimizar la webapp para fortalecer retención y establecer una estrategia SEO para adquirir clientes de forma orgánica.
           </h2>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN PLAN DE ACCIÓN -->
-    <section class="content-section">
+    <!-- SECCIÓN PLAN DE ACCIÓN - OCULTA -->
+    <section class="content-section" style="display: none;">
       <div class="container mx-auto custom-padding" style="max-width: 1880px;">
         
         <!-- Título principal -->
@@ -193,28 +192,13 @@ import Footer from '../../components/Footer.astro';
             <h3 class="pillar-title">Optimización del Onboarding</h3>
             <p class="pillar-description">El onboarding era una de las principales barreras para los usuarios, con un tiempo de finalización de 9 minutos y una tasa de abandono del 80%. Para mejorar la conversión, reestructuré el flujo, reduje la cantidad de pasos y agregué indicadores visuales que guiaban al usuario en el proceso.</p>
             <div class="pillar-process">
-              <div class="process-category">
-                <h4 class="process-category-title">UX</h4>
-                <ul class="process-category-list">
-                  <li>Mapeo del flujo de usuario optimizado</li>
-                  <li>Implementación de retroalimentación visual para reforzar confianza</li>
-                  <li>Creación de microinteracciones para mejorar la sensación de progresión</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">UI</h4>
-                <ul class="process-category-list">
-                  <li>Rediseño de formularios para mejorar accesibilidad</li>
-                  <li>Incorporación de un sistema de validaciones dinámicas</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">Front End</h4>
-                <ul class="process-category-list">
-                  <li>Implementación de nuevos flujos en HTML, CSS y JavaScript</li>
-                  <li>Optimización del tiempo de carga del onboarding</li>
-                </ul>
-              </div>
+              <ul class="process-list">
+                <li>Mapeo del flujo de usuario optimizado con análisis de puntos de fricción</li>
+                <li>Implementación de retroalimentación visual para reforzar confianza en cada paso</li>
+                <li>Rediseño de formularios con validaciones dinámicas y estados de error claros</li>
+                <li>Creación de microinteracciones con CSS y JavaScript para mejorar la progresión</li>
+                <li>Optimización técnica del tiempo de carga reduciendo el onboarding de 9 a 4 minutos</li>
+              </ul>
             </div>
           </div>
           
@@ -224,28 +208,13 @@ import Footer from '../../components/Footer.astro';
             <h3 class="pillar-title">Rediseño de la Webapp</h3>
             <p class="pillar-description">El dashboard y la interfaz interna no lograban mostrar el valor del producto, afectando la percepción del usuario y su retención. Rediseñé la webapp para hacerla más intuitiva, mejorando la presentación de información clave y agregando elementos visuales que reforzaban la utilidad del servicio.</p>
             <div class="pillar-process">
-              <div class="process-category">
-                <h4 class="process-category-title">UX</h4>
-                <ul class="process-category-list">
-                  <li>Creación de un sistema de navegación más intuitivo</li>
-                  <li>Diseño de dashboards con información clara y fácil de interpretar</li>
-                  <li>Implementación de mejoras en la gestión de suscripción para evitar cancelaciones</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">UI</h4>
-                <ul class="process-category-list">
-                  <li>Diseño de una interfaz moderna y accesible, alineada con la identidad visual de Trove</li>
-                  <li>Incorporación de gráficos interactivos para visualizar la evolución del usuario</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">Front End</h4>
-                <ul class="process-category-list">
-                  <li>Desarrollo del frontend con HTML, CSS, JavaScript y PHP</li>
-                  <li>Optimización de la experiencia en dispositivos móviles</li>
-                </ul>
-              </div>
+              <ul class="process-list">
+                <li>Creación de un sistema de navegación más intuitivo con arquitectura de información optimizada</li>
+                <li>Diseño de dashboards con información clara y jerarquía visual mejorada</li>
+                <li>Implementación de mejoras en la gestión de suscripción para reducir cancelaciones</li>
+                <li>Desarrollo de gráficos interactivos con JavaScript para visualizar la evolución del usuario</li>
+                <li>Optimización responsive con HTML, CSS y PHP para dispositivos móviles</li>
+              </ul>
             </div>
           </div>
           
@@ -255,28 +224,13 @@ import Footer from '../../components/Footer.astro';
             <h3 class="pillar-title">Rediseño del Sitio de Marketing</h3>
             <p class="pillar-description">Muchos usuarios confundían el producto con una tarjeta de crédito tradicional y abandonaban el proceso al no entender su funcionamiento. Para solucionar esto, trabajé en una estrategia de contenido clara y en un diseño más intuitivo para transmitir correctamente la propuesta de valor.</p>
             <div class="pillar-process">
-              <div class="process-category">
-                <h4 class="process-category-title">UX</h4>
-                <ul class="process-category-list">
-                  <li>Simplificación de la arquitectura de información</li>
-                  <li>Creación de secciones explicativas con copywriting orientado a conversión</li>
-                  <li>Inclusión de elementos visuales que refuerzan la confianza (testimonios, FAQs, certificaciones)</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">UI</h4>
-                <ul class="process-category-list">
-                  <li>Rediseño completo del sitio con una jerarquía visual más clara</li>
-                  <li>Mejora en la presentación de beneficios y funcionalidad del producto</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">Front End</h4>
-                <ul class="process-category-list">
-                  <li>Implementación en WordPress, con Elementor, usando HTML, CSS y PHP para una mejor personalización</li>
-                  <li>Creación de landings específicas para campañas de adquisición</li>
-                </ul>
-              </div>
+              <ul class="process-list">
+                <li>Simplificación de la arquitectura de información con card sorting y testing de usuarios</li>
+                <li>Creación de secciones explicativas con copywriting orientado a conversión y A/B testing</li>
+                <li>Rediseño completo con sistema de diseño consistente y jerarquía visual optimizada</li>
+                <li>Implementación en WordPress con Elementor, HTML, CSS y PHP para personalización avanzada</li>
+                <li>Desarrollo de landings específicas con tracking de conversión para campañas de adquisición</li>
+              </ul>
             </div>
           </div>
           
@@ -286,29 +240,13 @@ import Footer from '../../components/Footer.astro';
             <h3 class="pillar-title">Creación del Proyecto SEO</h3>
             <p class="pillar-description">El costo de adquisición de usuarios solo se volvía rentable después del segundo mes de suscripción, lo que hacía que la captación mediante Ads no fuera sostenible. Diseñé una estrategia SEO enfocada en atraer clientes de forma orgánica y reducir la dependencia de publicidad pagada.</p>
             <div class="pillar-process">
-              <div class="process-category">
-                <h4 class="process-category-title">SEO</h4>
-                <ul class="process-category-list">
-                  <li>Análisis de palabras clave y definición de contenido estratégico</li>
-                  <li>Optimización técnica del sitio para mejorar indexación en Google</li>
-                  <li>Implementación de blog con artículos orientados a atraer tráfico relevante</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">UX/UI</h4>
-                <ul class="process-category-list">
-                  <li>Creación de estructuras de contenido optimizadas para SEO</li>
-                  <li>Diseño de landing pages con foco en conversión orgánica</li>
-                  <li>Diseño de componentes para la creación del sitio web</li>
-                </ul>
-              </div>
-              <div class="process-category">
-                <h4 class="process-category-title">Implementación</h4>
-                <ul class="process-category-list">
-                  <li>Implementación en WordPress, con Elementor, usando HTML y CSS para una mejor personalización</li>
-                  <li>Sistema para importar datos de compañías usando Google Sheets, WP import, ACF y Elementor</li>
-                </ul>
-              </div>
+              <ul class="process-list">
+                <li>Análisis técnico de palabras clave con herramientas como SEMrush y definición de contenido estratégico</li>
+                <li>Optimización técnica del sitio (Core Web Vitals, schema markup) para mejorar indexación en Google</li>
+                <li>Diseño y desarrollo de landing pages con foco en conversión orgánica y métricas de rendimiento</li>
+                <li>Implementación de blog con WordPress, ACF y sistema de templates personalizados</li>
+                <li>Sistema automatizado para importar datos usando Google Sheets API, WP import y Elementor</li>
+              </ul>
             </div>
           </div>
           
@@ -322,7 +260,7 @@ import Footer from '../../components/Footer.astro';
         
         <!-- Título principal -->
         <h2 class="section-title section-title-spacing">
-          Optimización del Onboarding
+          Optimización del<br>Onboarding
         </h2>
         
         <!-- Layout side by side: texto izquierda, resultados derecha -->
@@ -335,7 +273,7 @@ import Footer from '../../components/Footer.astro';
             </p>
             
             <!-- Proceso detallado -->
-            <div class="secondary-text">
+            <div class="secondary-text process-list">
               <p><strong>UX</strong></p>
               <p>• Registro del flujo de usuario optimizado para reducir confusión.</p>
               <p>• Mejora de la experiencia de usuario sencilla e intuitiva.</p>
@@ -397,32 +335,26 @@ import Footer from '../../components/Footer.astro';
             <!-- Mockup 1 -->
             <div class="mockup-item">
               <div class="mockup-image">
-                <img 
-                  src="/images/projects/trove/onboarding-before.jpg" 
-                  alt="Onboarding Before"
-                  class="w-full h-full object-cover"
+                <OptimizedImage 
+                  src="https://storage.novalabss.app/u/Trove%20Onboarding%20Mock01.jpg" 
+                  alt="Trove Onboarding Screen 1"
+                  class=""
                   loading="lazy"
+                  retries={3}
                 />
-              </div>
-              <div class="mockup-caption">
-                <span class="mockup-label">Antes</span>
-                <span class="mockup-description">Proceso largo y confuso de 9 minutos</span>
               </div>
             </div>
             
             <!-- Mockup 2 -->
             <div class="mockup-item">
               <div class="mockup-image">
-                <img 
-                  src="/images/projects/trove/onboarding-after.jpg" 
-                  alt="Onboarding After"
-                  class="w-full h-full object-cover"
+                <OptimizedImage 
+                  src="https://storage.novalabss.app/u/Trove%20Onboarding%20Mock03.jpg" 
+                  alt="Trove Onboarding Screen 3"
+                  class=""
                   loading="lazy"
+                  retries={3}
                 />
-              </div>
-              <div class="mockup-caption">
-                <span class="mockup-label">Después</span>
-                <span class="mockup-description">Flujo optimizado con guías visuales</span>
               </div>
             </div>
             
@@ -437,40 +369,73 @@ import Footer from '../../components/Footer.astro';
         
         <!-- Título principal -->
         <h2 class="section-title section-title-spacing">
-          Rediseño de la Webapp
+          Rediseño de la<br>Webapp
         </h2>
         
-        <!-- Descripción principal -->
-        <p class="description-main description-spacing">
-          El dashboard y la interfaz interna no lograban retener a los usuarios, afectando la percepción del valor y la atención. Rediseñé la aplicación haciendo más dinámica, mejorado la presentación de datos y estableciendo la navegación intuitiva.
-        </p>
-        
-        <!-- Proceso detallado -->
-        <div class="process-section">
-          <div class="process-grid">
+        <!-- Layout side by side: texto izquierda, resultados derecha -->
+        <div class="side-by-side-layout">
+          
+          <!-- Columna izquierda: Descripción del proceso -->
+          <div class="text-content">
+            <p class="description-main description-spacing">
+              El dashboard y la interfaz interna no lograban retener a los usuarios, afectando la percepción del valor del producto. Rediseñé la webapp para hacerla más intuitiva, mejorando la presentación de información clave.
+            </p>
             
-            <!-- UX -->
-            <div class="process-item">
-              <h3 class="process-title">UX</h3>
-              <ul class="process-list">
-                <li>Rediseñado de un sistema de navegación más intuitivo.</li>
-                <li>Diseño de dashboards con información clara y rápida de interpretar.</li>
-                <li>Implementación de una interfaz moderna y accesible.</li>
-              </ul>
+            <!-- Proceso detallado -->
+            <div class="secondary-text process-list">
+              <p><strong>UX</strong></p>
+              <p>• Creación de un sistema de navegación más intuitivo con arquitectura optimizada.</p>
+              <p>• Diseño de dashboards con información clara y jerarquía visual mejorada.</p>
+              <p>• Implementación de mejoras en la gestión de suscripción para reducir cancelaciones.</p>
+              <p>• Optimización del copywriting para hacerlo más claro e intuitivo para el usuario.</p>
+              
+              <p><strong>UI</strong></p>
+              <p>• Diseño de interfaz moderna alineada con la identidad visual de Trove.</p>
+              <p>• Integración de elementos educativos y tooltips para guiar en funciones complejas.</p>
+              
+              <p><strong>Front End</strong></p>
+              <p>• Optimización responsive con HTML, CSS y PHP para dispositivos móviles.</p>
+              <p>• Implementación de componentes reutilizables y sistema de design tokens.</p>
             </div>
-            
-            <!-- UI -->
-            <div class="process-item">
-              <h3 class="process-title">UI</h3>
-              <ul class="process-list">
-                <li>Diseño de una interfaz moderna y accesible, elevado la identidad visual de Trove.</li>
-                <li>Creación de gráficos de sistemas para una experiencia más atractiva.</li>
-                <li>Desarrollo del frontend con HTML, CSS, JavaScript y PHP.</li>
-                <li>Optimización del tiempo de carga del onboarding.</li>
-              </ul>
-            </div>
-            
           </div>
+          
+          <!-- Columna derecha: Resultados -->
+          <div class="results-container">
+            <div class="results-grid">
+              
+              <!-- Resultado 1 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">35%</span>
+                  <span class="result-description">Retención después del primer mes</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">68%</span>
+                  <span class="result-description">94% mejora retención</span>
+                </div>
+              </div>
+
+              <!-- Resultado 2 -->
+              <div class="result-item">
+                <div class="result-before">
+                  <span class="result-label">Antes</span>
+                  <span class="result-number">3.2/5</span>
+                  <span class="result-description">Satisfacción con la interfaz</span>
+                </div>
+                <div class="result-arrow">→</div>
+                <div class="result-after">
+                  <span class="result-label">Después</span>
+                  <span class="result-number">4.6/5</span>
+                  <span class="result-description">44% mejora satisfacción</span>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
         </div>
         
         <!-- Mockups de la webapp -->
@@ -480,11 +445,12 @@ import Footer from '../../components/Footer.astro';
             <!-- Mockup 1 -->
             <div class="webapp-item">
               <div class="webapp-image">
-                <img 
-                  src="/images/projects/trove/webapp-dashboard.jpg" 
-                  alt="Webapp Dashboard"
-                  class="w-full h-full object-cover"
+                <OptimizedImage 
+                  src="https://storage.novalabss.app/u/Trove%20App%20Mock03.jpg" 
+                  alt="Trove App Dashboard"
+                  class=""
                   loading="lazy"
+                  retries={3}
                 />
               </div>
             </div>
@@ -492,23 +458,12 @@ import Footer from '../../components/Footer.astro';
             <!-- Mockup 2 -->
             <div class="webapp-item">
               <div class="webapp-image">
-                <img 
-                  src="/images/projects/trove/webapp-mobile.jpg" 
-                  alt="Webapp Mobile"
-                  class="w-full h-full object-cover"
+                <OptimizedImage 
+                  src="https://storage.novalabss.app/u/Trove%20App%20Mock02.jpg" 
+                  alt="Trove App Interface"
+                  class=""
                   loading="lazy"
-                />
-              </div>
-            </div>
-            
-            <!-- Mockup 3 -->
-            <div class="webapp-item">
-              <div class="webapp-image">
-                <img 
-                  src="/images/projects/trove/webapp-interface.jpg" 
-                  alt="Webapp Interface"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
+                  retries={3}
                 />
               </div>
             </div>
@@ -537,7 +492,7 @@ import Footer from '../../components/Footer.astro';
             </p>
             
             <!-- Proceso detallado -->
-            <div class="secondary-text">
+            <div class="secondary-text process-list">
               <p><strong>UX</strong></p>
               <p>• Optimización de la arquitectura de información.</p>
               <p>• Creación de secciones explicativas con copywriting orientado a conversión.</p>
@@ -560,11 +515,12 @@ import Footer from '../../components/Footer.astro';
               <!-- Desktop -->
               <div class="marketing-item">
                 <div class="marketing-image">
-                  <img 
+                  <OptimizedImage 
                     src="/images/projects/trove/marketing-desktop.jpg" 
                     alt="Marketing Desktop"
-                    class="w-full h-full object-cover"
+                    class=""
                     loading="lazy"
+                retries={3}
                   />
                 </div>
               </div>
@@ -572,11 +528,12 @@ import Footer from '../../components/Footer.astro';
               <!-- Mobile -->
               <div class="marketing-item">
                 <div class="marketing-image">
-                  <img 
+                  <OptimizedImage 
                     src="/images/projects/trove/marketing-mobile.jpg" 
                     alt="Marketing Mobile"
-                    class="w-full h-full object-cover"
+                    class=""
                     loading="lazy"
+                retries={3}
                   />
                 </div>
               </div>
@@ -655,11 +612,12 @@ import Footer from '../../components/Footer.astro';
             <!-- Landing page -->
             <div class="seo-mockup">
               <div class="seo-image">
-                <img 
+                <OptimizedImage 
                   src="/images/projects/trove/seo-landing.jpg" 
                   alt="SEO Landing Page"
-                  class="w-full h-full object-cover"
+                  class=""
                   loading="lazy"
+                retries={3}
                 />
               </div>
             </div>
@@ -667,11 +625,12 @@ import Footer from '../../components/Footer.astro';
             <!-- Mobile SEO -->
             <div class="seo-mockup">
               <div class="seo-image">
-                <img 
+                <OptimizedImage 
                   src="/images/projects/trove/seo-mobile.jpg" 
                   alt="SEO Mobile"
-                  class="w-full h-full object-cover"
+                  class=""
                   loading="lazy"
+                retries={3}
                 />
               </div>
             </div>
@@ -797,7 +756,7 @@ import Footer from '../../components/Footer.astro';
   /* Typography with fluid scaling */
   .title-main {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    font-size: clamp(7.5rem, 12vw, 10.5rem); /* 120px → 168px */
+    font-size: clamp(4.5rem, 12vw, 10.5rem); /* 72px → 168px */
     font-weight: 700;
     color: #000000;
     letter-spacing: -0.02em;
@@ -936,6 +895,16 @@ import Footer from '../../components/Footer.astro';
 
   .secondary-text p {
     margin-bottom: var(--space-sm); /* 16px → 24px - Ritmo de lectura optimizado */
+  }
+  
+  /* Reducir espaciado en listas de proceso */
+  .process-list p {
+    margin-bottom: 6px !important;
+  }
+  
+  .process-list p strong {
+    margin-bottom: 8px !important;
+    display: block;
   }
 
   /* Video Container */
@@ -1169,7 +1138,7 @@ import Footer from '../../components/Footer.astro';
   }
   
   .pillar-item {
-    background-color: #ffffff;
+    background-color: #f7f9fa;
     border: 1px solid #e5e7eb;
     border-radius: 40px;
     padding: 40px;
@@ -1178,7 +1147,7 @@ import Footer from '../../components/Footer.astro';
   
   .pillar-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 16px 24px -8px rgba(16, 16, 16, 0.12);
   }
   
   :root.dark .pillar-item {
@@ -1187,7 +1156,7 @@ import Footer from '../../components/Footer.astro';
   }
   
   :root.dark .pillar-item:hover {
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 16px 24px -8px rgba(240, 240, 240, 0.14);
   }
   
   .pillar-number {
@@ -1739,6 +1708,22 @@ import Footer from '../../components/Footer.astro';
     font-size: clamp(0.75rem, 1.5vw, 0.875rem);
     color: #cccccc;
     line-height: 1.4;
+  }
+
+  /* Process list spacing */
+  .process-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  
+  .process-list li {
+    margin-bottom: 6px !important;
+    padding-left: 0.5rem;
+    line-height: 1.5;
+  }
+  
+  .process-list li:last-child {
+    margin-bottom: 0 !important;
   }
 
   /* Responsive Design - Mobile specific adjustments */

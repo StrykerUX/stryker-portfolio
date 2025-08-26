@@ -1,0 +1,253 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fallback?: string;
+  retries?: number;
+  preload?: boolean;
+}
+
+const { 
+  src, 
+  alt, 
+  class: className = '', 
+  loading = 'lazy',
+  fallback,
+  retries = 3,
+  preload = false
+} = Astro.props;
+
+// Generar ID único para cada imagen
+const imageId = `img-${Math.random().toString(36).substring(2, 15)}`;
+
+// Determinar si es imagen externa (storage.novalabss.app)
+const isExternalImage = src.includes('storage.novalabss.app');
+
+// Fallback por defecto para imágenes externas
+const defaultFallback = fallback || '/images/placeholder.jpg';
+---
+
+<div class={`optimized-image-wrapper w-full h-full ${className}`} data-image-id={imageId}>
+  <!-- Placeholder mientras carga -->
+  <div class="image-placeholder absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse flex items-center justify-center">
+    <div class="loading-spinner w-8 h-8 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+  
+  <!-- Imagen principal -->
+  <img 
+    id={imageId}
+    src={src} 
+    alt={alt}
+    class={`optimized-image w-full h-full object-cover transition-opacity duration-300 opacity-0 ${className}`}
+    loading={loading}
+    data-retries={retries}
+    data-fallback={defaultFallback}
+    data-original-src={src}
+  />
+</div>
+
+<script>
+  class OptimizedImageLoader {
+    constructor() {
+      this.loadedImages = new Set();
+      this.failedImages = new Set();
+      this.observers = new Map();
+      
+      this.init();
+    }
+    
+    init() {
+      // Preload de imágenes críticas
+      this.preloadCriticalImages();
+      
+      // Setup Intersection Observer para lazy loading
+      this.setupIntersectionObserver();
+      
+      // Observar todas las imágenes optimizadas
+      this.observeAllImages();
+    }
+    
+    preloadCriticalImages() {
+      // Precargar imágenes que están above the fold
+      const criticalImages = document.querySelectorAll('.optimized-image[loading="eager"]');
+      criticalImages.forEach(img => {
+        this.preloadImage(img.dataset.originalSrc || img.src);
+      });
+    }
+    
+    setupIntersectionObserver() {
+      this.imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const wrapper = entry.target;
+            const img = wrapper.querySelector('.optimized-image');
+            if (img && !this.loadedImages.has(img.id)) {
+              this.loadImageWithRetry(img);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px 0px',
+        threshold: 0.1
+      });
+    }
+    
+    observeAllImages() {
+      const wrappers = document.querySelectorAll('.optimized-image-wrapper');
+      wrappers.forEach(wrapper => {
+        this.imageObserver.observe(wrapper);
+      });
+    }
+    
+    async preloadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = () => reject(src);
+        img.src = src;
+      });
+    }
+    
+    async loadImageWithRetry(imgElement, attempt = 1) {
+      const maxRetries = parseInt(imgElement.dataset.retries) || 3;
+      const originalSrc = imgElement.dataset.originalSrc;
+      const fallbackSrc = imgElement.dataset.fallback;
+      const wrapper = imgElement.closest('.optimized-image-wrapper');
+      const placeholder = wrapper.querySelector('.image-placeholder');
+      
+      try {
+        // Intentar cargar la imagen
+        await this.preloadImage(originalSrc);
+        
+        // Si se carga exitosamente
+        imgElement.src = originalSrc;
+        imgElement.classList.add('opacity-100');
+        imgElement.classList.remove('opacity-0');
+        placeholder.style.display = 'none';
+        
+        this.loadedImages.add(imgElement.id);
+        
+        // Trigger custom event
+        imgElement.dispatchEvent(new CustomEvent('imageLoaded', {
+          detail: { src: originalSrc, attempt }
+        }));
+        
+      } catch (error) {
+        console.warn(`Failed to load image ${originalSrc}, attempt ${attempt}/${maxRetries}`);
+        
+        if (attempt < maxRetries) {
+          // Retry con delay exponential backoff
+          const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+          setTimeout(() => {
+            this.loadImageWithRetry(imgElement, attempt + 1);
+          }, delay);
+        } else {
+          // Usar fallback después de todos los intentos
+          this.useFallbackImage(imgElement, fallbackSrc);
+        }
+      }
+    }
+    
+    useFallbackImage(imgElement, fallbackSrc) {
+      const wrapper = imgElement.closest('.optimized-image-wrapper');
+      const placeholder = wrapper.querySelector('.image-placeholder');
+      
+      if (fallbackSrc && fallbackSrc !== imgElement.dataset.originalSrc) {
+        imgElement.src = fallbackSrc;
+        imgElement.classList.add('opacity-100');
+        imgElement.classList.remove('opacity-0');
+        placeholder.style.display = 'none';
+        
+        imgElement.dispatchEvent(new CustomEvent('imageFallback', {
+          detail: { originalSrc: imgElement.dataset.originalSrc, fallbackSrc }
+        }));
+      } else {
+        // Mostrar placeholder con mensaje de error elegante
+        placeholder.innerHTML = `
+          <div class="flex flex-col items-center justify-center text-gray-400 p-4">
+            <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-sm font-medium">${imgElement.alt}</span>
+          </div>
+        `;
+        placeholder.classList.remove('animate-pulse');
+      }
+      
+      this.failedImages.add(imgElement.id);
+    }
+    
+    // Método público para reintent manual
+    retryImage(imageId) {
+      const img = document.getElementById(imageId);
+      if (img && this.failedImages.has(imageId)) {
+        this.failedImages.delete(imageId);
+        this.loadImageWithRetry(img);
+      }
+    }
+    
+    // Método público para precargar imágenes específicas
+    preloadImageList(srcList) {
+      srcList.forEach(src => {
+        this.preloadImage(src).catch(() => {
+          console.warn(`Failed to preload: ${src}`);
+        });
+      });
+    }
+  }
+  
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      window.optimizedImageLoader = new OptimizedImageLoader();
+    });
+  } else {
+    window.optimizedImageLoader = new OptimizedImageLoader();
+  }
+  
+  // Exponer métodos globalmente para debugging
+  window.retryImage = (imageId) => window.optimizedImageLoader?.retryImage(imageId);
+  window.preloadImages = (srcList) => window.optimizedImageLoader?.preloadImageList(srcList);
+</script>
+
+<style>
+  .optimized-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .image-placeholder {
+    z-index: 1;
+  }
+  
+  .optimized-image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .loading-spinner {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Dark mode */
+  :root.dark .image-placeholder {
+    background: linear-gradient(135deg, #374151, #1f2937);
+  }
+  
+  :root.dark .loading-spinner {
+    border-color: #6b7280;
+    border-top-color: transparent;
+  }
+</style>
